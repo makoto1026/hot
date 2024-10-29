@@ -1,0 +1,98 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_sample/components/top_bottom_sheet_tab.dart';
+import 'package:flutter_sample/features/sample2/sample2_page.dart';
+import 'package:flutter_sample/features/sample3/sample3_page.dart';
+import 'package:flutter_sample/features/top/top_page.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+/// アプリのルーティングです。
+GoRouter appRouter(Ref ref) => GoRouter(
+      navigatorKey: rootNavigatorKey,
+      initialLocation: AppRoutes.top.path,
+      routes: appRoutes,
+    );
+
+/// アプリのルート情報です。
+@visibleForTesting
+final appRoutes = [
+  StatefulShellRoute.indexedStack(
+    parentNavigatorKey: rootNavigatorKey,
+    builder: (context, state, navigationShell) =>
+        TopBottomSheetTab(navigationShell: navigationShell),
+    branches: [
+      ///MEMO: タブ分けしたいページをここに追加してください。
+      StatefulShellBranch(
+        navigatorKey: _topNavigatorKey,
+        routes: [
+          GoRoute(
+            path: AppRoutes.top.path,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: TopPage(),
+            ),
+          ),
+        ],
+      ),
+      StatefulShellBranch(
+        navigatorKey: _sample2NavigatorKey,
+        routes: [
+          GoRoute(
+            path: AppRoutes.sample2.path,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: Sample2Page(),
+            ),
+          ),
+        ],
+      ),
+      StatefulShellBranch(
+        navigatorKey: _sample3NavigatorKey,
+        routes: [
+          GoRoute(
+            path: AppRoutes.sample3.path,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: Sample3Page(),
+            ),
+          ),
+        ],
+      ),
+    ],
+  ),
+
+  ///MEMO: ここにルーティングを追加してください。
+  // GoRoute(
+  //   parentNavigatorKey: rootNavigatorKey,
+  //   path: AppRoutes.top.path,
+  //   pageBuilder: (context, state) => const MaterialPage(
+  //     child: TopPage(),
+  //   ),
+  // ),
+];
+
+/// アプリのルーティングパスです。
+enum AppRoutes {
+  /// トップページ
+  top('/top'),
+
+  /// サンプルページ2
+  sample2('/sample2'),
+
+  /// サンプルページ3
+  sample3('/sample3');
+
+  const AppRoutes(this.path);
+
+  /// ルートのパス
+  final String path;
+}
+
+/// ルート用のキー
+final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
+
+// トップのナビゲーションキー
+final _topNavigatorKey = GlobalKey<NavigatorState>();
+
+// サンプリページ２のナビゲーションキー
+final _sample2NavigatorKey = GlobalKey<NavigatorState>();
+
+// サンプリページ3のナビゲーションキー
+final _sample3NavigatorKey = GlobalKey<NavigatorState>();
