@@ -20,7 +20,7 @@ class Sample2Page extends HookConsumerWidget {
           children: [
             Text('サンプル２ページ'),
             Gap(16),
-            Text('ここにコンテンツを配置してください'),
+            Text('テストします'),
           ],
         ),
       ),
