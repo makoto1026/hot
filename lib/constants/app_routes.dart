@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/components/top_bottom_sheet_tab.dart';
+import 'package:flutter_sample/features/room/room.dart';
 import 'package:flutter_sample/features/sample2/sample2_page.dart';
 import 'package:flutter_sample/features/sample3/sample3_page.dart';
 import 'package:flutter_sample/features/top/top_page.dart';
@@ -57,21 +58,22 @@ final appRoutes = [
       ),
     ],
   ),
-
-  ///MEMO: ここにルーティングを追加してください。
-  // GoRoute(
-  //   parentNavigatorKey: rootNavigatorKey,
-  //   path: AppRoutes.top.path,
-  //   pageBuilder: (context, state) => const MaterialPage(
-  //     child: TopPage(),
-  //   ),
-  // ),
+  GoRoute(
+    parentNavigatorKey: rootNavigatorKey,
+    path: AppRoutes.room.path,
+    pageBuilder: (context, state) => const MaterialPage(
+      child: RoomPage(),
+    ),
+  ),
 ];
 
 /// アプリのルーティングパスです。
 enum AppRoutes {
   /// トップページ
   top('/top'),
+
+  /// Roomページ
+  room('/room'),
 
   /// サンプルページ2
   sample2('/sample2'),
