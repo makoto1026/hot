@@ -1,15 +1,14 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:hub_of_talking/flame/flame.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-/// Roomページです。
-class RoomPage extends HookConsumerWidget {
+/// マップスペースです。
+class MapSpace extends StatelessWidget {
   /// コンストラクタ
-  const RoomPage({super.key});
+  const MapSpace({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[50],
