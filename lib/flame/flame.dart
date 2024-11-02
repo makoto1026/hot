@@ -50,6 +50,11 @@ class AppFlame extends FlameGame with TapDetector {
   @override
   void update(double dt) {
     super.update(dt);
-    character.position += joystick.delta * moveSpeed * dt;
+    character.position += joystick.delta * moveSpeed * 0.01;
+  }
+
+  /// X座標、Y座標を指定してキャラクターの位置を設定します。
+  void setCharacterPositionFromGeoLocate(double x, double y) {
+    character.position = Vector2(x, y) * moveSpeed * 0.01;
   }
 }
