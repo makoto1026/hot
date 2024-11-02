@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LoginState {
   String get name => throw _privateConstructorUsedError;
-  String get SnsLink => throw _privateConstructorUsedError;
+  String get snsLink => throw _privateConstructorUsedError;
   String get thumbnail => throw _privateConstructorUsedError;
   String get product => throw _privateConstructorUsedError;
 
@@ -34,7 +34,7 @@ abstract class $LoginStateCopyWith<$Res> {
           LoginState value, $Res Function(LoginState) then) =
       _$LoginStateCopyWithImpl<$Res, LoginState>;
   @useResult
-  $Res call({String name, String SnsLink, String thumbnail, String product});
+  $Res call({String name, String snsLink, String thumbnail, String product});
 }
 
 /// @nodoc
@@ -53,7 +53,7 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
   @override
   $Res call({
     Object? name = null,
-    Object? SnsLink = null,
+    Object? snsLink = null,
     Object? thumbnail = null,
     Object? product = null,
   }) {
@@ -62,9 +62,9 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      SnsLink: null == SnsLink
-          ? _value.SnsLink
-          : SnsLink // ignore: cast_nullable_to_non_nullable
+      snsLink: null == snsLink
+          ? _value.snsLink
+          : snsLink // ignore: cast_nullable_to_non_nullable
               as String,
       thumbnail: null == thumbnail
           ? _value.thumbnail
@@ -86,7 +86,7 @@ abstract class _$$LoginStateImplCopyWith<$Res>
       __$$LoginStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String SnsLink, String thumbnail, String product});
+  $Res call({String name, String snsLink, String thumbnail, String product});
 }
 
 /// @nodoc
@@ -103,7 +103,7 @@ class __$$LoginStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
-    Object? SnsLink = null,
+    Object? snsLink = null,
     Object? thumbnail = null,
     Object? product = null,
   }) {
@@ -112,9 +112,9 @@ class __$$LoginStateImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      SnsLink: null == SnsLink
-          ? _value.SnsLink
-          : SnsLink // ignore: cast_nullable_to_non_nullable
+      snsLink: null == snsLink
+          ? _value.snsLink
+          : snsLink // ignore: cast_nullable_to_non_nullable
               as String,
       thumbnail: null == thumbnail
           ? _value.thumbnail
@@ -133,7 +133,7 @@ class __$$LoginStateImplCopyWithImpl<$Res>
 class _$LoginStateImpl extends _LoginState {
   const _$LoginStateImpl(
       {this.name = '',
-      this.SnsLink = '',
+      this.snsLink = '',
       this.thumbnail = '',
       this.product = ''})
       : super._();
@@ -143,7 +143,7 @@ class _$LoginStateImpl extends _LoginState {
   final String name;
   @override
   @JsonKey()
-  final String SnsLink;
+  final String snsLink;
   @override
   @JsonKey()
   final String thumbnail;
@@ -153,7 +153,7 @@ class _$LoginStateImpl extends _LoginState {
 
   @override
   String toString() {
-    return 'LoginState(name: $name, SnsLink: $SnsLink, thumbnail: $thumbnail, product: $product)';
+    return 'LoginState(name: $name, snsLink: $snsLink, thumbnail: $thumbnail, product: $product)';
   }
 
   @override
@@ -162,7 +162,7 @@ class _$LoginStateImpl extends _LoginState {
         (other.runtimeType == runtimeType &&
             other is _$LoginStateImpl &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.SnsLink, SnsLink) || other.SnsLink == SnsLink) &&
+            (identical(other.snsLink, snsLink) || other.snsLink == snsLink) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
             (identical(other.product, product) || other.product == product));
@@ -170,7 +170,7 @@ class _$LoginStateImpl extends _LoginState {
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, name, SnsLink, thumbnail, product);
+      Object.hash(runtimeType, name, snsLink, thumbnail, product);
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
@@ -184,7 +184,7 @@ class _$LoginStateImpl extends _LoginState {
 abstract class _LoginState extends LoginState {
   const factory _LoginState(
       {final String name,
-      final String SnsLink,
+      final String snsLink,
       final String thumbnail,
       final String product}) = _$LoginStateImpl;
   const _LoginState._() : super._();
@@ -192,7 +192,7 @@ abstract class _LoginState extends LoginState {
   @override
   String get name;
   @override
-  String get SnsLink;
+  String get snsLink;
   @override
   String get thumbnail;
   @override

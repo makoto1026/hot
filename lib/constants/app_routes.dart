@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hub_of_talking/components/top_bottom_sheet_tab.dart';
-import 'package:hub_of_talking/features/page/signin/login_page.dart';
-import 'package:hub_of_talking/features/room/room_page.dart';
-import 'package:hub_of_talking/features/user/sample2_page.dart';
-import 'package:hub_of_talking/features/sample3/sample3_page.dart';
-import 'package:hub_of_talking/features/top/top_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:hub_of_talking/components/top_bottom_sheet_tab.dart';
+import 'package:hub_of_talking/features/page/login_page.dart';
+import 'package:hub_of_talking/features/page/room_page.dart';
+import 'package:hub_of_talking/features/page/top_page.dart';
 
 /// アプリのルーティングです。
 GoRouter appRouter(Ref ref) => GoRouter(
@@ -41,7 +39,7 @@ final appRoutes = [
           GoRoute(
             path: AppRoutes.sample2.path,
             pageBuilder: (context, state) => const NoTransitionPage(
-              child: Sample2Page(),
+              child: SizedBox(),
             ),
           ),
         ],
@@ -52,7 +50,7 @@ final appRoutes = [
           GoRoute(
             path: AppRoutes.sample3.path,
             pageBuilder: (context, state) => const NoTransitionPage(
-              child: Sample3Page(),
+              child: SizedBox(),
             ),
           ),
         ],

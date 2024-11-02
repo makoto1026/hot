@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:hub_of_talking/features/location/domain/location.dart';
+import 'package:hub_of_talking/features/location/domain/model/location.dart';
 import 'package:hub_of_talking/features/location/infrastructure/location_repository_provider.dart';
 import 'package:hub_of_talking/features/location/provider/location_manager.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

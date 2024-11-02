@@ -6,10 +6,12 @@ part 'user.g.dart';
 
 @freezed
 class User with _$User {
+  @JsonSerializable(fieldRename: FieldRename.snake)
+
   /// コンストラクタ
   const factory User({
     required String id,
-    required String name,
+    required String displayName,
     required String thumbnail,
     required String snsUrl,
     required String product,

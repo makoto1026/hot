@@ -4,8 +4,8 @@ import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:hub_of_talking/features/location/domain/location.dart';
-import 'package:hub_of_talking/features/user/domain/user.dart';
+import 'package:hub_of_talking/features/location/domain/model/location.dart';
+import 'package:hub_of_talking/features/user/domain/model/user.dart';
 import 'package:hub_of_talking/flame/member.dart';
 import 'package:hub_of_talking/flame/widget/character_component.dart';
 

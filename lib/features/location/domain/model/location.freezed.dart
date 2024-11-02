@@ -169,7 +169,8 @@ class __$$LocationImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(fieldRename: FieldRename.snake)
 class _$LocationImpl implements _Location {
   const _$LocationImpl(
       {required this.id,

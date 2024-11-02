@@ -1,7 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hub_of_talking/features/location/domain/location.dart';
-import 'package:hub_of_talking/features/user/domain/user.dart';
+import 'package:hub_of_talking/features/location/domain/model/location.dart';
+import 'package:hub_of_talking/features/user/domain/model/user.dart';
 
 part 'member.freezed.dart';
 

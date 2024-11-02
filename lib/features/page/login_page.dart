@@ -3,37 +3,21 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:hub_of_talking/constants/app_routes.dart';
-import 'package:hub_of_talking/features/login/domain/model/login_request.dart';
-import 'package:hub_of_talking/features/user/domain/user.dart';
+import 'package:hub_of_talking/features/login/provider/login.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as supabaseModel;
-import 'package:hub_of_talking/features/login/provider/login_notifier.dart';
 
 class LoginPage extends HookConsumerWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final supabase = supabaseModel.Supabase.instance.client;
-    final formKey = GlobalKey<FormState>();
-
-    // useTextEditingControllerでコントローラーを設定
-    final nameController = useTextEditingController();
-    final productController = useTextEditingController();
-    final imageController = useTextEditingController();
-    final snsController = useTextEditingController();
+    final formKey = useMemoized(GlobalKey<FormState>.new, []);
+    final user = ref.watch(loginProvider);
 
     Future<void> loginAnonymously() async {
       try {
         if (formKey.currentState?.validate() ?? false) {
-          final request = LoginRequest(
-            displayName: nameController.value.text,
-            thumbnail: 'thumbnail',
-            snsUrl: snsController.value.text,
-            product: productController.value.text,
-          );
-          // TODO 名前違う
-          final loginRepository = ref.read(loginNotifierProvider.notifier);
-          await loginRepository.login(request: request);
+          ref.read(loginProvider.notifier).login();
         }
 
         await context.push(AppRoutes.room.path);
@@ -55,7 +39,7 @@ class LoginPage extends HookConsumerWidget {
           child: Column(
             children: [
               TextFormField(
-                controller: nameController,
+                onChanged: ref.watch(loginProvider.notifier).setName,
                 decoration: const InputDecoration(labelText: 'Name'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -65,7 +49,7 @@ class LoginPage extends HookConsumerWidget {
                 },
               ),
               TextFormField(
-                controller: productController,
+                onChanged: ref.watch(loginProvider.notifier).setProduct,
                 decoration: const InputDecoration(labelText: 'Product Name'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -75,7 +59,6 @@ class LoginPage extends HookConsumerWidget {
                 },
               ),
               TextFormField(
-                controller: imageController,
                 decoration: const InputDecoration(labelText: 'Image URL'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -90,7 +73,7 @@ class LoginPage extends HookConsumerWidget {
                 },
               ),
               TextFormField(
-                controller: snsController,
+                onChanged: ref.watch(loginProvider.notifier).setSnsLink,
                 decoration: const InputDecoration(labelText: 'SNS Link'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {

@@ -1,18 +1,18 @@
-import 'package:hub_of_talking/features/user/domain/user.dart';
+import 'package:hub_of_talking/features/user/domain/model/user.dart';
 import 'package:hub_of_talking/features/user/infrastructure/user_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 
-part 'user_notifier.g.dart';
+part 'edit_user.g.dart';
 
 /// サンプルNotifierです。
 @riverpod
-class UserNotifier extends _$UserNotifier {
+class EditUser extends _$EditUser {
   late final supabase.SupabaseClient _supabase;
 
   void inputName(String name) {
     state = AsyncValue.data(
-      state.requireValue.copyWith(name: name),
+      state.requireValue.copyWith(displayName: name),
     );
   }
 
@@ -34,14 +34,8 @@ class UserNotifier extends _$UserNotifier {
     );
   }
 
-  Future<void> updateUser(User user) async {
-    try {
-      final userRepository = ref.read(userRepositoryProvider);
-      await userRepository.updateUser(user: user);
-    } catch (e) {
-      print('updateUserError: $e');
-      return;
-    }
+  Future<void> updateUser() async {
+    return ref.read(userRepositoryProvider).updateUser(state.requireValue);
   }
 
   void inputUser({
@@ -49,7 +43,7 @@ class UserNotifier extends _$UserNotifier {
   }) {
     state = AsyncValue.data(
       state.requireValue.copyWith(
-        name: user.name,
+        displayName: user.displayName,
         product: user.product,
         thumbnail: user.thumbnail,
         snsUrl: user.snsUrl,
@@ -59,19 +53,10 @@ class UserNotifier extends _$UserNotifier {
 
   @override
   Future<User> build() async {
-    final user = _supabase.auth.currentUser;
+    final currentUser = _supabase.auth.currentUser;
 
-    final displayName = user?.appMetadata['display_name'].toString() ?? '';
-    final snsUrl = user?.appMetadata['sns_url'].toString() ?? '';
-    final thumbnail = user?.appMetadata['thumbnail'].toString() ?? '';
-    final product = user?.appMetadata['product'].toString() ?? '';
-    await ref.watch(userRepositoryProvider).fetchUsers();
-    return User(
-      id: user?.id ?? '',
-      name: displayName,
-      thumbnail: thumbnail,
-      snsUrl: snsUrl,
-      product: product,
-    );
+    final user =
+        await ref.watch(userRepositoryProvider).fetchUser(currentUser!.id);
+    return user;
   }
 }

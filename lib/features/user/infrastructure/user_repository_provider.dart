@@ -1,5 +1,5 @@
 import 'package:hub_of_talking/features/user/infrastructure/impl/user_repository.dart';
-import 'package:hub_of_talking/features/user/infrastructure/user_repository.dart';
+import 'package:hub_of_talking/features/user/domain/repository/user_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

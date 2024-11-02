@@ -1,5 +1,5 @@
-import 'package:hub_of_talking/features/location/infrastructure/location_repository.dart';
-import 'package:hub_of_talking/features/location/domain/location.dart';
+import 'package:hub_of_talking/features/location/domain/repository/location_repository.dart';
+import 'package:hub_of_talking/features/location/domain/model/location.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 

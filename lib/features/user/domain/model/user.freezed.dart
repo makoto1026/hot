@@ -21,7 +21,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$User {
   String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String get displayName => throw _privateConstructorUsedError;
   String get thumbnail => throw _privateConstructorUsedError;
   String get snsUrl => throw _privateConstructorUsedError;
   String get product => throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ abstract class $UserCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String name,
+      String displayName,
       String thumbnail,
       String snsUrl,
       String product});
@@ -64,7 +64,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
+    Object? displayName = null,
     Object? thumbnail = null,
     Object? snsUrl = null,
     Object? product = null,
@@ -74,9 +74,9 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      displayName: null == displayName
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
               as String,
       thumbnail: null == thumbnail
           ? _value.thumbnail
@@ -103,7 +103,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String name,
+      String displayName,
       String thumbnail,
       String snsUrl,
       String product});
@@ -122,7 +122,7 @@ class __$$UserImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
+    Object? displayName = null,
     Object? thumbnail = null,
     Object? snsUrl = null,
     Object? product = null,
@@ -132,9 +132,9 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      displayName: null == displayName
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
               as String,
       thumbnail: null == thumbnail
           ? _value.thumbnail
@@ -153,11 +153,12 @@ class __$$UserImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(fieldRename: FieldRename.snake)
 class _$UserImpl implements _User {
   const _$UserImpl(
       {required this.id,
-      required this.name,
+      required this.displayName,
       required this.thumbnail,
       required this.snsUrl,
       required this.product});
@@ -168,7 +169,7 @@ class _$UserImpl implements _User {
   @override
   final String id;
   @override
-  final String name;
+  final String displayName;
   @override
   final String thumbnail;
   @override
@@ -178,7 +179,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, thumbnail: $thumbnail, snsUrl: $snsUrl, product: $product)';
+    return 'User(id: $id, displayName: $displayName, thumbnail: $thumbnail, snsUrl: $snsUrl, product: $product)';
   }
 
   @override
@@ -187,7 +188,8 @@ class _$UserImpl implements _User {
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
+            (identical(other.displayName, displayName) ||
+                other.displayName == displayName) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
             (identical(other.snsUrl, snsUrl) || other.snsUrl == snsUrl) &&
@@ -197,7 +199,7 @@ class _$UserImpl implements _User {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, name, thumbnail, snsUrl, product);
+      Object.hash(runtimeType, id, displayName, thumbnail, snsUrl, product);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -218,7 +220,7 @@ class _$UserImpl implements _User {
 abstract class _User implements User {
   const factory _User(
       {required final String id,
-      required final String name,
+      required final String displayName,
       required final String thumbnail,
       required final String snsUrl,
       required final String product}) = _$UserImpl;
@@ -228,7 +230,7 @@ abstract class _User implements User {
   @override
   String get id;
   @override
-  String get name;
+  String get displayName;
   @override
   String get thumbnail;
   @override

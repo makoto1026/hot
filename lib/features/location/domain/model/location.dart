@@ -7,6 +7,8 @@ part 'location.g.dart';
 /// サンプル情報です。
 @freezed
 class Location with _$Location {
+  @JsonSerializable(fieldRename: FieldRename.snake)
+
   /// コンストラクタ
   const factory Location({
     required String id,
