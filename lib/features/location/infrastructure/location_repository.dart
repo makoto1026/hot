@@ -6,6 +6,6 @@ import 'package:hub_of_talking/features/location/domain/location.dart';
 abstract class LocationRepository {
   /// サンプルです
   Future<Location> upsert(String id, Location location);
-  Future<List<Location>> all();
+  Stream<List<Location>> all();
   Future<Location> get(String userId);
 }

@@ -2,7 +2,8 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:hub_of_talking/features/location/provide/location_manager.dart';
+import 'package:hub_of_talking/features/location/provider/location_manager.dart';
+import 'package:hub_of_talking/features/room/provider/map.dart';
 import 'package:hub_of_talking/flame/flame.dart';
 
 /// マップスペースです。
@@ -13,6 +14,7 @@ class MapSpace extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final locationProvider = ref.watch(locationManagerProvider);
+    final map = ref.watch(mapProvider);
 
     /// TODO(tera): 位置情報をマップに反映します（WIP）
     useEffect(
@@ -38,7 +40,7 @@ class MapSpace extends HookConsumerWidget {
       ),
       backgroundColor: Colors.green[50],
       body: GameWidget(
-        game: AppFlame(),
+        game: map.requireValue,
       ),
     );
   }

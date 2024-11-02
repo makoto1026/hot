@@ -3,7 +3,11 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:hub_of_talking/features/user/domain/user.dart';
+import 'package:hub_of_talking/flame/member.dart';
 import 'package:hub_of_talking/flame/widget/character_component.dart';
+
+typedef UserId = String;
 
 /// フレーム
 class AppFlame extends FlameGame with TapDetector {
@@ -14,6 +18,7 @@ class AppFlame extends FlameGame with TapDetector {
   late SpriteComponent myCharacter;
   late SpriteComponent character2;
   late SpriteComponent character3;
+  final Map<UserId, Member> members = {};
 
   /// ジョイスティック
   late JoystickComponent joystick;
@@ -78,6 +83,24 @@ class AppFlame extends FlameGame with TapDetector {
 
     /// myCharacterを画面の一番上に表示する
     myCharacter.priority = 1;
+  }
+
+  Future<void> addMembers(List<User> users) async {
+    // キャラクターの読み込みと表示
+    for (final user in users) {
+      // すでにいる場合は追加しない。
+      character2 = CharacterComponent(
+        name: '友だち１',
+        characterPositionX: size.x / 3,
+        characterPositionY: size.y / 3,
+      )
+        ..sprite = await loadSprite('character_2.png')
+        ..size = Vector2(32, 32) // キャラクターサイズを設定
+        ..position = Vector2(size.x / 3, size.y / 3); // 初期位置を画面中央に設定
+
+      members[user.sampleId] = Member(user: user, spriteComponent: character2);
+      add(character3);
+    }
   }
 
   @override

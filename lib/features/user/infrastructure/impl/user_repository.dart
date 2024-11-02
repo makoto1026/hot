@@ -13,6 +13,17 @@ class ImplUserRepository implements UserRepository {
   late final supabase.SupabaseClient _supabase;
 
   @override
+  Stream<List<User>> all() {
+    final response = _supabase
+        .from('users') // テーブル名
+        .stream(primaryKey: ['id']).map((data) {
+      // MapのリストをUserオブジェクトのリストに変換
+      return data.map(User.fromJson).toList();
+    });
+    return response;
+  }
+
+  @override
   Future<User> fetchUsers() async {
     try {
       final response = await _supabase

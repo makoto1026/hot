@@ -23,11 +23,14 @@ class ImplLocationRepository implements LocationRepository {
   }
 
   @override
-  Future<List<Location>> all() async {
-    final response = await _supabase
+  Stream<List<Location>> all() {
+    final response = _supabase
         .from('locations') // テーブル名
-        .select();
-    return response.map(Location.fromJson).toList();
+        .stream(primaryKey: ['id']).map((data) {
+      // MapのリストをLocationオブジェクトのリストに変換
+      return data.map(Location.fromJson).toList();
+    });
+    return response;
   }
 
   @override
