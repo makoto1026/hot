@@ -50,6 +50,9 @@ class $AssetsAppIconGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/cat.png
+  AssetGenImage get cat => const AssetGenImage('assets/images/cat.png');
+
   /// File path: assets/images/character.png
   AssetGenImage get character =>
       const AssetGenImage('assets/images/character.png');
@@ -66,7 +69,8 @@ class $AssetsImagesGen {
   AssetGenImage get map => const AssetGenImage('assets/images/map.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [character, character2, character3, map];
+  List<AssetGenImage> get values =>
+      [cat, character, character2, character3, map];
 }
 
 class Assets {

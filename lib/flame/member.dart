@@ -12,6 +12,6 @@ class Member with _$Member {
   const factory Member({
     required User user,
     Location? location,
-    required SpriteComponent spriteComponent,
+    required SpriteAnimationComponent spriteComponent,
   }) = _Member;
 }

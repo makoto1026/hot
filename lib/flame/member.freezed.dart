@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Member {
   User get user => throw _privateConstructorUsedError;
   Location? get location => throw _privateConstructorUsedError;
-  SpriteComponent get spriteComponent => throw _privateConstructorUsedError;
+  SpriteAnimationComponent get spriteComponent =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of Member
   /// with the given fields replaced by the non-null parameter values.
@@ -31,7 +32,10 @@ abstract class $MemberCopyWith<$Res> {
   factory $MemberCopyWith(Member value, $Res Function(Member) then) =
       _$MemberCopyWithImpl<$Res, Member>;
   @useResult
-  $Res call({User user, Location? location, SpriteComponent spriteComponent});
+  $Res call(
+      {User user,
+      Location? location,
+      SpriteAnimationComponent spriteComponent});
 
   $UserCopyWith<$Res> get user;
   $LocationCopyWith<$Res>? get location;
@@ -68,7 +72,7 @@ class _$MemberCopyWithImpl<$Res, $Val extends Member>
       spriteComponent: null == spriteComponent
           ? _value.spriteComponent
           : spriteComponent // ignore: cast_nullable_to_non_nullable
-              as SpriteComponent,
+              as SpriteAnimationComponent,
     ) as $Val);
   }
 
@@ -104,7 +108,10 @@ abstract class _$$MemberImplCopyWith<$Res> implements $MemberCopyWith<$Res> {
       __$$MemberImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({User user, Location? location, SpriteComponent spriteComponent});
+  $Res call(
+      {User user,
+      Location? location,
+      SpriteAnimationComponent spriteComponent});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -141,7 +148,7 @@ class __$$MemberImplCopyWithImpl<$Res>
       spriteComponent: null == spriteComponent
           ? _value.spriteComponent
           : spriteComponent // ignore: cast_nullable_to_non_nullable
-              as SpriteComponent,
+              as SpriteAnimationComponent,
     ));
   }
 }
@@ -157,7 +164,7 @@ class _$MemberImpl implements _Member {
   @override
   final Location? location;
   @override
-  final SpriteComponent spriteComponent;
+  final SpriteAnimationComponent spriteComponent;
 
   @override
   String toString() {
@@ -192,14 +199,14 @@ abstract class _Member implements Member {
   const factory _Member(
       {required final User user,
       final Location? location,
-      required final SpriteComponent spriteComponent}) = _$MemberImpl;
+      required final SpriteAnimationComponent spriteComponent}) = _$MemberImpl;
 
   @override
   User get user;
   @override
   Location? get location;
   @override
-  SpriteComponent get spriteComponent;
+  SpriteAnimationComponent get spriteComponent;
 
   /// Create a copy of Member
   /// with the given fields replaced by the non-null parameter values.
