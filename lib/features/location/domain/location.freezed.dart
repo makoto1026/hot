@@ -25,6 +25,7 @@ mixin _$Location {
   double get longitude => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
 
   /// Serializes this Location to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,7 +47,8 @@ abstract class $LocationCopyWith<$Res> {
       double latitude,
       double longitude,
       DateTime createdAt,
-      DateTime updatedAt});
+      DateTime updatedAt,
+      String userId});
 }
 
 /// @nodoc
@@ -69,6 +71,7 @@ class _$LocationCopyWithImpl<$Res, $Val extends Location>
     Object? longitude = null,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? userId = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -91,6 +94,10 @@ class _$LocationCopyWithImpl<$Res, $Val extends Location>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -108,7 +115,8 @@ abstract class _$$LocationImplCopyWith<$Res>
       double latitude,
       double longitude,
       DateTime createdAt,
-      DateTime updatedAt});
+      DateTime updatedAt,
+      String userId});
 }
 
 /// @nodoc
@@ -129,6 +137,7 @@ class __$$LocationImplCopyWithImpl<$Res>
     Object? longitude = null,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? userId = null,
   }) {
     return _then(_$LocationImpl(
       id: null == id
@@ -151,6 +160,10 @@ class __$$LocationImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -163,7 +176,8 @@ class _$LocationImpl implements _Location {
       required this.latitude,
       required this.longitude,
       required this.createdAt,
-      required this.updatedAt});
+      required this.updatedAt,
+      required this.userId});
 
   factory _$LocationImpl.fromJson(Map<String, dynamic> json) =>
       _$$LocationImplFromJson(json);
@@ -178,10 +192,12 @@ class _$LocationImpl implements _Location {
   final DateTime createdAt;
   @override
   final DateTime updatedAt;
+  @override
+  final String userId;
 
   @override
   String toString() {
-    return 'Location(id: $id, latitude: $latitude, longitude: $longitude, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Location(id: $id, latitude: $latitude, longitude: $longitude, createdAt: $createdAt, updatedAt: $updatedAt, userId: $userId)';
   }
 
   @override
@@ -197,13 +213,14 @@ class _$LocationImpl implements _Location {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            (identical(other.userId, userId) || other.userId == userId));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, latitude, longitude, createdAt, updatedAt);
+  int get hashCode => Object.hash(
+      runtimeType, id, latitude, longitude, createdAt, updatedAt, userId);
 
   /// Create a copy of Location
   /// with the given fields replaced by the non-null parameter values.
@@ -227,7 +244,8 @@ abstract class _Location implements Location {
       required final double latitude,
       required final double longitude,
       required final DateTime createdAt,
-      required final DateTime updatedAt}) = _$LocationImpl;
+      required final DateTime updatedAt,
+      required final String userId}) = _$LocationImpl;
 
   factory _Location.fromJson(Map<String, dynamic> json) =
       _$LocationImpl.fromJson;
@@ -242,6 +260,8 @@ abstract class _Location implements Location {
   DateTime get createdAt;
   @override
   DateTime get updatedAt;
+  @override
+  String get userId;
 
   /// Create a copy of Location
   /// with the given fields replaced by the non-null parameter values.

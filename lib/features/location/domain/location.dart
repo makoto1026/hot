@@ -17,6 +17,7 @@ class Location with _$Location {
     required double longitude,
     required DateTime createdAt,
     required DateTime updatedAt,
+    required String userId,
   }) = _Location;
 
   /// JSONからLocationに変換します。
@@ -27,11 +28,9 @@ class Location with _$Location {
     required double latitude,
     required double longitude,
   }) {
-    return Location(
-      id: const UuidV4().toString(),
+    return copyWith(
       latitude: latitude,
       longitude: longitude,
-      createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     );
   }

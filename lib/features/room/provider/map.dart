@@ -10,12 +10,16 @@ part 'map.g.dart';
 class Map extends _$Map {
   @override
   Future<AppFlame> build() async {
-    ref.watch(userRepositoryProvider).all().listen((user) {
-      // userをセットする
-      state.value?.addMembers(user);
-    });
+    final users = await ref.watch(userRepositoryProvider).fetchUsers();
+
+    for (final u in users) {
+      unawaited(state.value?.addMember(u));
+    }
     ref.watch(locationRepositoryProvider).all().listen((location) {
       // locationをセットする
+      for (final l in location) {
+        unawaited(state.value?.updateLocation(l));
+      }
     });
     return AppFlame();
   }
