@@ -1,5 +1,5 @@
 import 'package:flutter_sample/features/sample2/infrastructure/impl/sample_repository.dart';
-import 'package:flutter_sample/features/sample2/infrastructure/sample/sample_repository.dart';
+import 'package:flutter_sample/features/sample2/infrastructure/sample_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
