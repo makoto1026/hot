@@ -260,17 +260,17 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
       // キャラクターを移動させる
       me.position += delta * moveSpeed * dt;
 
-      // // ターゲット位置が設定されている場合、そこへスムーズに移動
-      Future.delayed(Duration(seconds: 3), () {
-        if (targetPosition == null) {
-          targetPosition = Vector2(size.x / 2, size.y / 2);
-          elapsedTime = 0;
+      // // TODO(tera): positionを自動で更新するコード、後で消す
+      // Future.delayed(Duration(seconds: 3), () {
+      //   if (targetPosition == null) {
+      //     targetPosition = Vector2(size.x / 2, size.y / 2);
+      //     elapsedTime = 0;
 
-          // 距離に基づいて戻りにかかる時間を計算
-          double distance = me.position.distanceTo(targetPosition!);
-          returnDuration = distance / returnSpeed; // 距離と速度から時間を計算
-        }
-      });
+      //     // 距離に基づいて戻りにかかる時間を計算
+      //     double distance = me.position.distanceTo(targetPosition!);
+      //     returnDuration = distance / returnSpeed; // 距離と速度から時間を計算
+      //   }
+      // });
     } else if (joystick.delta == Vector2.zero() && targetPosition == null) {
       // ジョイスティックの入力がない場合はアイドル状態に戻す
       me.animation =
