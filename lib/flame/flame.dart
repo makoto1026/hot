@@ -20,6 +20,7 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
 
   /// 移動速度
   final double moveSpeed = 2.5;
+  final double returnSpeed = 2.5;
 
   /// アニメーションとアイドル画像
   late Sprite idleSprite;
@@ -27,6 +28,11 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
   late SpriteAnimation walkDownAnimation;
   late SpriteAnimation walkLeftAnimation;
   late SpriteAnimation walkRightAnimation;
+
+  // ターゲット位置と移動中フラグ
+  Vector2? targetPosition;
+  double elapsedTime = 0;
+  double returnDuration = 0; // 戻りにかかる時間
 
   @override
   Future<void> onLoad() async {
@@ -159,34 +165,56 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
   void update(double dt) {
     super.update(dt);
 
-    // ジョイスティックの入力がある場合
-    if (joystick.delta != Vector2.zero()) {
-      // ジョイスティックの方向を取得
+    // ターゲット位置がない場合のみジョイスティック入力を反映
+    if (targetPosition == null && joystick.delta != Vector2.zero()) {
       final delta = joystick.delta;
 
-// キャラクターの向きを判定してアニメーションを設定
+      // キャラクターの向きを判定してアニメーションを設定
       if (delta.x.abs() > delta.y.abs()) {
-        // 左右の移動が優先
         if (delta.x < 0) {
-          myCharacter.animation = walkLeftAnimation; // 左に移動
+          myCharacter.animation = walkLeftAnimation;
         } else {
-          myCharacter.animation = walkRightAnimation; // 右に移動
+          myCharacter.animation = walkRightAnimation;
         }
       } else {
-        // 上下の移動が優先
         if (delta.y < 0) {
-          myCharacter.animation = walkUpAnimation; // 上に移動
+          myCharacter.animation = walkUpAnimation;
         } else {
-          myCharacter.animation = walkDownAnimation; // 下に移動
+          myCharacter.animation = walkDownAnimation;
         }
       }
 
       // キャラクターを移動させる
       myCharacter.position += delta * moveSpeed * dt;
-    } else {
+
+      // ターゲット位置が設定されている場合、そこへスムーズに移動
+      Future.delayed(Duration(seconds: 3), () {
+        if (targetPosition == null) {
+          targetPosition = Vector2(size.x / 2, size.y / 2);
+          elapsedTime = 0;
+
+          // 距離に基づいて戻りにかかる時間を計算
+          double distance = myCharacter.position.distanceTo(targetPosition!);
+          returnDuration = distance / returnSpeed; // 距離と速度から時間を計算
+        }
+      });
+    } else if (joystick.delta == Vector2.zero() && targetPosition == null) {
       // ジョイスティックの入力がない場合はアイドル状態に戻す
       myCharacter.animation =
           SpriteAnimation.spriteList([idleSprite], stepTime: double.infinity);
+    }
+
+    if (targetPosition != null) {
+      elapsedTime += dt;
+      final t = (elapsedTime / returnDuration).clamp(0, 1);
+
+      // カスタム線形補間を使用して位置をスムーズに更新
+      myCharacter.position = Vector2(
+        myCharacter.position.x +
+            (targetPosition!.x - myCharacter.position.x) * t,
+        myCharacter.position.y +
+            (targetPosition!.y - myCharacter.position.y) * t,
+      );
     }
   }
 
