@@ -1,7 +1,4 @@
-import 'dart:ffi';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:uuid/v4.dart';
 
 part 'location.freezed.dart';
 
@@ -23,15 +20,4 @@ class Location with _$Location {
   /// JSONからLocationに変換します。
   factory Location.fromJson(Map<String, dynamic> json) =>
       _$LocationFromJson(json);
-
-  Location update({
-    required double latitude,
-    required double longitude,
-  }) {
-    return copyWith(
-      latitude: latitude,
-      longitude: longitude,
-      updatedAt: DateTime.now(),
-    );
-  }
 }

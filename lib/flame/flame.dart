@@ -3,6 +3,7 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:hub_of_talking/features/location/domain/location.dart';
 import 'package:hub_of_talking/features/user/domain/user.dart';
 import 'package:hub_of_talking/flame/member.dart';
@@ -33,10 +34,8 @@ class AppFlame extends FlameGame with TapDetector {
   late SpriteComponent map;
 
   /// キャラクター
-  late SpriteComponent myCharacter;
-  late SpriteComponent character2;
-  late SpriteComponent character3;
-  final Map<UserId, Member> members = {};
+  late SpriteComponent me;
+  late Map<UserId, Member> members = {};
 
   /// ジョイスティック
   late JoystickComponent joystick;
@@ -70,14 +69,14 @@ class AppFlame extends FlameGame with TapDetector {
     add(map);
 
     // // キャラクターの読み込みと表示
-    // myCharacter = CharacterComponent(
-    //   name: 'じぶん',
-    //   characterPositionX: size.x / 2,
-    //   characterPositionY: size.y / 2,
-    // )
-    //   ..sprite = await loadSprite('character.png')
-    //   ..size = Vector2(32, 32) // キャラクターサイズを設定
-    //   ..position = Vector2(size.x / 2, size.y / 2); // 初期位置を画面中央に設定
+    me = CharacterComponent(
+      name: 'じぶん',
+      characterPositionX: size.x / 2,
+      characterPositionY: size.y / 2,
+    )
+      ..sprite = await loadSprite('character.png')
+      ..size = Vector2(32, 32) // キャラクターサイズを設定
+      ..position = Vector2(size.x / 2, size.y / 2); // 初期位置を画面中央に設定
 
     // // キャラクターの読み込みと表示
     // character2 = CharacterComponent(
@@ -99,7 +98,7 @@ class AppFlame extends FlameGame with TapDetector {
     //   ..size = Vector2(32, 32) // キャラクターサイズを設定
     //   ..position = Vector2(size.x / 1.5, size.y / 1.5); // 初期位置を画面中央に設定
 
-    // add(myCharacter);
+    add(me);
     // add(character2);
     // add(character3);
 
@@ -117,16 +116,16 @@ class AppFlame extends FlameGame with TapDetector {
     add(joystick);
 
     /// myCharacterを画面の一番上に表示する
-    myCharacter.priority = 1;
+    me.priority = 1;
   }
 
   Future<void> addMember(User user) async {
     //もし存在してたら何もしない
-    if (members.containsKey(user.sampleId)) {
+    if (members.containsKey(user.id)) {
       return;
     }
 
-    character2 = CharacterComponent(
+    final character = CharacterComponent(
       name: '友だち１',
       characterPositionX: size.x / 3,
       characterPositionY: size.y / 3,
@@ -135,8 +134,8 @@ class AppFlame extends FlameGame with TapDetector {
       ..size = Vector2(32, 32) // キャラクターサイズを設定
       ..position = Vector2(size.x / 3, size.y / 3); // 初期位置を画面中央に設定
 
-    members[user.sampleId] = Member(user: user, spriteComponent: character2);
-    add(character3);
+    members[user.id] = Member(user: user, spriteComponent: character);
+    add(character);
   }
 
   Future<void> updateLocation(Location location) async {
@@ -147,11 +146,22 @@ class AppFlame extends FlameGame with TapDetector {
   @override
   void update(double dt) {
     super.update(dt);
-    myCharacter.position += joystick.delta * moveSpeed * 0.01;
+    print('update');
+    me.position += joystick.delta * moveSpeed * 0.01;
   }
 
   /// X座標、Y座標を指定してキャラクターの位置を設定します。
-  void setCharacterPositionFromGeoLocate(double x, double y) {
-    myCharacter.position = Vector2(x, y) * moveSpeed * 0.01;
+  void updateMeLocation(Position position) {
+    print('updateMeLocation');
+    final relativePosition =
+        getRelativePosition(GPSPoint(position.latitude, position.longitude));
+    me.position =
+        Vector2(relativePosition.x, relativePosition.y) * moveSpeed * 0.01;
+  }
+
+  /// X座標、Y座標を指定してキャラクターの位置を設定します。
+  void setMeLocation() {
+    print('updateMeLocation');
+    me.position = Vector2(0, 0) * moveSpeed * 0.01;
   }
 }

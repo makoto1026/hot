@@ -6,7 +6,7 @@ part of 'location_auto_save.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$locationAutoSaveHash() => r'c5e05a5d10d7b26a14405fb8144bf44273f30295';
+String _$locationAutoSaveHash() => r'5b1c238b2ab73bf0c2a2a972d30f7ce3384ae84a';
 
 /// Copied from Dart SDK
 class _SystemHash {

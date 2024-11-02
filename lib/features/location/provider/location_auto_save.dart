@@ -17,10 +17,12 @@ class LocationAutoSave extends _$LocationAutoSave {
         data: (position) async {
           if (timer == null || !timer!.isActive) {
             timer = Timer.periodic(const Duration(seconds: 20), (_) {
-              final location = state.value?.update(
+              final location = state.value?.copyWith(
                 latitude: position.latitude,
                 longitude: position.longitude,
+                updatedAt: DateTime.now(),
               );
+
               ref
                   .watch(locationRepositoryProvider)
                   .upsert(location!.id, location);

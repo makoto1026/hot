@@ -11,7 +11,7 @@ class UserNotifier extends _$UserNotifier {
   Future<User> build() async {
     await ref.watch(userRepositoryProvider).fetchUsers();
     return const User(
-      sampleId: '',
+      id: '',
     );
   }
 }
