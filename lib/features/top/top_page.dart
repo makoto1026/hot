@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hub_of_talking/constants/app_routes.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// トップページです。
@@ -14,13 +16,18 @@ class TopPage extends HookConsumerWidget {
         backgroundColor: Colors.green[50],
       ),
       backgroundColor: Colors.green[50],
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('トップページ'),
-            Gap(16),
-            Text('ここにコンテンツを配置してください'),
+            const Text('トップページ'),
+            const Gap(16),
+            ElevatedButton(
+              onPressed: () {
+                context.push(AppRoutes.room.path);
+              },
+              child: const Text('入室'),
+            ),
           ],
         ),
       ),

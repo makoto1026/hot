@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'sample.dart';
+part of 'user.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,42 +14,42 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-Sample _$SampleFromJson(Map<String, dynamic> json) {
-  return _Sample.fromJson(json);
+User _$UserFromJson(Map<String, dynamic> json) {
+  return _User.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Sample {
+mixin _$User {
   String get sampleId => throw _privateConstructorUsedError;
 
-  /// Serializes this Sample to a JSON map.
+  /// Serializes this User to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of Sample
+  /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $SampleCopyWith<Sample> get copyWith => throw _privateConstructorUsedError;
+  $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SampleCopyWith<$Res> {
-  factory $SampleCopyWith(Sample value, $Res Function(Sample) then) =
-      _$SampleCopyWithImpl<$Res, Sample>;
+abstract class $UserCopyWith<$Res> {
+  factory $UserCopyWith(User value, $Res Function(User) then) =
+      _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call({String sampleId});
 }
 
 /// @nodoc
-class _$SampleCopyWithImpl<$Res, $Val extends Sample>
-    implements $SampleCopyWith<$Res> {
-  _$SampleCopyWithImpl(this._value, this._then);
+class _$UserCopyWithImpl<$Res, $Val extends User>
+    implements $UserCopyWith<$Res> {
+  _$UserCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Sample
+  /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -66,31 +66,30 @@ class _$SampleCopyWithImpl<$Res, $Val extends Sample>
 }
 
 /// @nodoc
-abstract class _$$SampleImplCopyWith<$Res> implements $SampleCopyWith<$Res> {
-  factory _$$SampleImplCopyWith(
-          _$SampleImpl value, $Res Function(_$SampleImpl) then) =
-      __$$SampleImplCopyWithImpl<$Res>;
+abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
+  factory _$$UserImplCopyWith(
+          _$UserImpl value, $Res Function(_$UserImpl) then) =
+      __$$UserImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String sampleId});
 }
 
 /// @nodoc
-class __$$SampleImplCopyWithImpl<$Res>
-    extends _$SampleCopyWithImpl<$Res, _$SampleImpl>
-    implements _$$SampleImplCopyWith<$Res> {
-  __$$SampleImplCopyWithImpl(
-      _$SampleImpl _value, $Res Function(_$SampleImpl) _then)
+class __$$UserImplCopyWithImpl<$Res>
+    extends _$UserCopyWithImpl<$Res, _$UserImpl>
+    implements _$$UserImplCopyWith<$Res> {
+  __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Sample
+  /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? sampleId = null,
   }) {
-    return _then(_$SampleImpl(
+    return _then(_$UserImpl(
       sampleId: null == sampleId
           ? _value.sampleId
           : sampleId // ignore: cast_nullable_to_non_nullable
@@ -101,25 +100,25 @@ class __$$SampleImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SampleImpl implements _Sample {
-  const _$SampleImpl({required this.sampleId});
+class _$UserImpl implements _User {
+  const _$UserImpl({required this.sampleId});
 
-  factory _$SampleImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SampleImplFromJson(json);
+  factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserImplFromJson(json);
 
   @override
   final String sampleId;
 
   @override
   String toString() {
-    return 'Sample(sampleId: $sampleId)';
+    return 'User(sampleId: $sampleId)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SampleImpl &&
+            other is _$UserImpl &&
             (identical(other.sampleId, sampleId) ||
                 other.sampleId == sampleId));
   }
@@ -128,34 +127,34 @@ class _$SampleImpl implements _Sample {
   @override
   int get hashCode => Object.hash(runtimeType, sampleId);
 
-  /// Create a copy of Sample
+  /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SampleImplCopyWith<_$SampleImpl> get copyWith =>
-      __$$SampleImplCopyWithImpl<_$SampleImpl>(this, _$identity);
+  _$$UserImplCopyWith<_$UserImpl> get copyWith =>
+      __$$UserImplCopyWithImpl<_$UserImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SampleImplToJson(
+    return _$$UserImplToJson(
       this,
     );
   }
 }
 
-abstract class _Sample implements Sample {
-  const factory _Sample({required final String sampleId}) = _$SampleImpl;
+abstract class _User implements User {
+  const factory _User({required final String sampleId}) = _$UserImpl;
 
-  factory _Sample.fromJson(Map<String, dynamic> json) = _$SampleImpl.fromJson;
+  factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
   String get sampleId;
 
-  /// Create a copy of Sample
+  /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SampleImplCopyWith<_$SampleImpl> get copyWith =>
+  _$$UserImplCopyWith<_$UserImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

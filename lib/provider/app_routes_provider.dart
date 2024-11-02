@@ -1,4 +1,4 @@
-import 'package:flutter_sample/constants/app_routes.dart';
+import 'package:hub_of_talking/constants/app_routes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
