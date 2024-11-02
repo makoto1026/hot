@@ -14,20 +14,15 @@ class SampleApp extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(appRoutesProvider);
 
-    Future<void> init() {
-      return Future.wait([
-        ref.read(locationPermissionManagerProvider.notifier).load(),
-      ]);
-    }
-
     useEffect(
       () {
-        init();
+        Future.microtask(() async {
+          await ref.read(locationPermissionManagerProvider.notifier).load();
+        });
         return null;
       },
       [],
     );
-
     return MaterialApp.router(
       title: 'HUB OF TALKING',
       theme: ref.watch(lightThemeProvider),

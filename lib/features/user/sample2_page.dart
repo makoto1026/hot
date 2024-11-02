@@ -11,6 +11,7 @@ class Sample2Page extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(userNotifierProvider);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[50],
@@ -20,7 +21,7 @@ class Sample2Page extends HookConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('サンプル２ページ'),
+            Text('プル２ページ'),
             Gap(16),
             Text('ここにコンテンツを配置してください'),
           ],
