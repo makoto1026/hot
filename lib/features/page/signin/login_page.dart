@@ -31,6 +31,7 @@ class LoginPage extends HookConsumerWidget {
             snsUrl: snsController.value.text,
             product: productController.value.text,
           );
+          // TODO 名前違う
           final loginRepository = ref.read(loginNotifierProvider.notifier);
           await loginRepository.login(request: request);
         }

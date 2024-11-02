@@ -7,6 +7,7 @@ import 'package:hub_of_talking/features/user/domain/user.dart';
 abstract class UserRepository {
   /// サンプルです
   Future<void> updateUser({required User user});
+  //TODO LoginRequestを消す
   Future<void> insertUser({required LoginRequest loginRequest});
   Future<List<User>> fetchUsers();
 }

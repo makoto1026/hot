@@ -11,11 +11,13 @@ class ImplLoginRepository implements LoginRepository {
   late final supabase.SupabaseClient _supabase;
 
   @override
+  // TODO 認証はserviceに移動して、updateはUserRepositoryでやる
   Future<void> loginAnonymously() async {
     try {
       await _supabase.auth.signInAnonymously();
 
       // 匿名ログインが成功した後にメタデータを更新
+      //TODO
       final user = _supabase.auth.currentUser;
 
       final displayName = user?.appMetadata['display_name'] ?? '';

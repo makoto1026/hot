@@ -25,6 +25,7 @@ class ImplUserRepository implements UserRepository {
   @override
   Future<void> updateUser({required User user}) async {
     try {
+      // TODOfreezedのtoJsonを使う
       await _supabase.from('users').update({
         'display_name': user.name,
         'sns_url': user.snsUrl,
@@ -36,6 +37,7 @@ class ImplUserRepository implements UserRepository {
     }
   }
 
+  // TODO freezedのtoJsonを使う
   @override
   Future<void> insertUser({required LoginRequest loginRequest}) async {
     await _supabase.from('users').insert({
