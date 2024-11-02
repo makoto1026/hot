@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sample/constants/app_theme.dart';
-import 'package:flutter_sample/provider/app_routes_provider.dart';
+import 'package:hub_of_talking/constants/app_theme.dart';
+import 'package:hub_of_talking/provider/app_routes_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// サンプルアプリです。

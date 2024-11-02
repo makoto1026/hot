@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sample/components/top_bottom_sheet_tab.dart';
-import 'package:flutter_sample/features/room/room.dart';
-import 'package:flutter_sample/features/sample2/sample2_page.dart';
-import 'package:flutter_sample/features/sample3/sample3_page.dart';
-import 'package:flutter_sample/features/top/top_page.dart';
+import 'package:hub_of_talking/components/top_bottom_sheet_tab.dart';
+import 'package:hub_of_talking/features/room/room.dart';
+import 'package:hub_of_talking/features/user/sample2_page.dart';
+import 'package:hub_of_talking/features/sample3/sample3_page.dart';
+import 'package:hub_of_talking/features/top/top_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

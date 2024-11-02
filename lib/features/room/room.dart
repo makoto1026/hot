@@ -1,6 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sample/flame/flame.dart';
+import 'package:hub_of_talking/flame/flame.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// Roomページです。
