@@ -35,10 +35,10 @@ Future<void> main() async {
   const flavor = String.fromEnvironment('FLAVOR');
 
   // Supabaseを初期化
-  await Supabase.initialize(
-    url: Config.supabaseUrl,
-    anonKey: Config.supabaseAnon,
-  );
+  // await Supabase.initialize(
+  //   url: Config.supabaseUrl,
+  //   anonKey: Config.supabaseAnon,
+  // );
 
   runApp(
     UncontrolledProviderScope(
