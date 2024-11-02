@@ -6,4 +6,5 @@ import 'package:hub_of_talking/features/user/domain/user.dart';
 abstract class UserRepository {
   /// サンプルです
   Future<User> fetchUsers();
+  Future<void> updateUserProfileFromMetadata();
 }

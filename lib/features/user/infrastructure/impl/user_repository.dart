@@ -23,12 +23,52 @@ class ImplUserRepository implements UserRepository {
 
       final sample = User(
         sampleId: response['id'] as String,
+        name: response['display_name'] as String,
+        thumbnail: response['thumbnail'] as String,
+        snsUrl: response['sns_url'] as String,
+        product: response['product'] as String,
       );
 
       return sample;
     } catch (e) {
       print('Error fetching samples: $e');
-      return const User(sampleId: '');
+      return const User(
+        sampleId: '',
+        name: '',
+        thumbnail: '',
+        snsUrl: '',
+        product: '',
+      );
+    }
+  }
+
+  /// ユーザーのメタデータをDBにアップデート
+  @override
+  Future<void> updateUserProfileFromMetadata() async {
+    try {
+      final user = _supabase.auth.currentUser;
+
+      if (user != null) {
+        final metadata = user.userMetadata;
+
+        // メタデータから必要な情報を取り出す
+        final name = metadata?['display_name'] as String? ?? '';
+        final snsUrl = metadata?['sns_url'] as String? ?? '';
+        final image = metadata?['image'] as String? ?? '';
+        final product = metadata?['product'] as String? ?? '';
+
+        // profilesテーブルにデータを保存または更新
+        final response = await _supabase.from('users').upsert({
+          'id': user.id,
+          'display_name': name,
+          'sns_url': snsUrl,
+          'thumbnail': image,
+          'product': product,
+        });
+        print('User profile updated: $response');
+      }
+    } catch (e) {
+      print('Error updating user profile from metadata: $e');
     }
   }
 }

@@ -12,6 +12,10 @@ class UserNotifier extends _$UserNotifier {
     await ref.watch(userRepositoryProvider).fetchUsers();
     return const User(
       sampleId: '',
+      name: '',
+      thumbnail: '',
+      snsUrl: '',
+      product: '',
     );
   }
 }
