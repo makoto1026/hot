@@ -9,8 +9,7 @@ part 'user_notifier.g.dart';
 class UserNotifier extends _$UserNotifier {
   @override
   Future<User> build() async {
-    final _ = ref.watch(userRepositoryProvider);
-
+    await ref.watch(userRepositoryProvider).fetchUsers();
     return const User(
       sampleId: '',
     );

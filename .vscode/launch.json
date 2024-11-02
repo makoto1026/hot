@@ -1,32 +1,26 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "dev",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "debug",
-            "args": [
-                "--dart-define=FLAVOR=dev"
-            ]
-        },
-        {
-            "name": "stg",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "debug",
-            "args": [
-                "--dart-define=FLAVOR=stg"
-            ]
-        },
-        {
-            "name": "prd",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "debug",
-            "args": [
-                "--dart-define=FLAVOR=prd"
-            ]
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "dev",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "args": ["--dart-define-from-file=config/dev/env.json"]
+    },
+    {
+      "name": "stg",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "args": ["--dart-define=FLAVOR=stg"]
+    },
+    {
+      "name": "prd",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "args": ["--dart-define=FLAVOR=prd"]
+    }
+  ]
 }

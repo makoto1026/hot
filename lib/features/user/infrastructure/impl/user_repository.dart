@@ -25,12 +25,10 @@ class ImplUserRepository implements UserRepository {
         sampleId: response['id'] as String,
       );
 
-      print(sample.sampleId);
-
       return sample;
     } catch (e) {
       print('Error fetching samples: $e');
-      return User(sampleId: '');
+      return const User(sampleId: '');
     }
   }
 }
