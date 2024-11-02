@@ -30,8 +30,7 @@ class RoundedButton extends HookConsumerWidget {
   BorderSide? get borderSide {
     if (style is OutlineButtonStyle) {
       return BorderSide(
-        color: (style! as OutlineButtonStyle).borderColor ??
-            ColorTheme.placeHolder,
+        color: (style! as OutlineButtonStyle).borderColor ?? ColorTheme.white,
         width: 3,
       );
     }
@@ -131,13 +130,13 @@ class RoundedButton extends HookConsumerWidget {
 class RoundedButtonStyle {
   const RoundedButtonStyle({
     this.backgroundColor = Colors.white,
-    this.textColor = ColorTheme.black,
-    this.captionColor = ColorTheme.paleGray,
+    this.textColor = ColorTheme.white,
+    this.captionColor = ColorTheme.white,
   });
 
   RoundedButtonStyle.primary()
-      : captionColor = ColorTheme.paleGray,
-        backgroundColor = ColorTheme.primary,
+      : captionColor = ColorTheme.white,
+        backgroundColor = ColorTheme.white,
         textColor = Colors.white;
 
   final Color? backgroundColor;
@@ -147,10 +146,10 @@ class RoundedButtonStyle {
 
 class OutlineButtonStyle extends RoundedButtonStyle {
   const OutlineButtonStyle({
-    this.borderColor = ColorTheme.placeHolder,
+    this.borderColor = ColorTheme.white,
   }) : super();
 
-  OutlineButtonStyle.primary() : borderColor = ColorTheme.primary;
+  OutlineButtonStyle.primary() : borderColor = ColorTheme.white;
 
   final Color? borderColor;
 }
