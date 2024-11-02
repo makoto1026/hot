@@ -58,6 +58,8 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
   double elapsedTime = 0;
   double returnDuration = 0; // 戻りにかかる時間
 
+  bool isLoaded = false;
+
 // 現在位置を部屋の四隅を基準に擬似マップ上の相対位置に変換する関数
   Vector2 getRelativePosition(GPSPoint currentPosition) {
     // 緯度経度の範囲を計算
@@ -189,40 +191,46 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
 
     /// meを画面の一番上に表示する
     me.priority = 1;
+
+    isLoaded = true;
   }
 
   /// メンバー追加
   Future<void> addMember(User user) async {
+    if (!isLoaded) {
+      return;
+    }
     // TODO(tera): onLoadedとの兼ね合いでこのままだと動かない
-    // //もし存在してたら何もしない
-    // if (members.containsKey(user.id)) {
-    //   return;
-    // }
-    // final character2SpriteSheet =
-    //     await images.load('character_2.png'); // 添付された歩行アニメーションスプライトシート
-    // final character2Animation = SpriteAnimation.fromFrameData(
-    //   character2SpriteSheet,
-    //   SpriteAnimationData.sequenced(
-    //     amount: 3, // フレーム数 (例: スプライトシートに4フレームある場合)
-    //     stepTime: 0.1, // 各フレームの表示時間
-    //     textureSize: Vector2(32, 48), // 各フレームのサイズ
-    //   ),
-    // );
+    //もし存在してたら何もしない
+    if (members.containsKey(user.id)) {
+      return;
+    }
+    final character2SpriteSheet =
+        await images.load('character_2.png'); // 添付された歩行アニメーションスプライトシート
+    final character2Animation = SpriteAnimation.fromFrameData(
+      character2SpriteSheet,
+      SpriteAnimationData.sequenced(
+        amount: 3, // フレーム数 (例: スプライトシートに4フレームある場合)
+        stepTime: 0.1, // 各フレームの表示時間
+        textureSize: Vector2(32, 48), // 各フレームのサイズ
+      ),
+    );
 
-    // final character = CharacterComponent(
-    //   name: '友だち１',
-    //   characterPositionX: size.x / 3,
-    //   characterPositionY: size.y / 3,
-    // )
-    //   ..animation = character2Animation
-    //   ..size = Vector2(32, 48) // キャラクターサイズを設定
-    //   ..position = Vector2(size.x / 3, size.y / 3); // 初期位置を画面中央に設定
+    final character = CharacterComponent(
+      name: '友だち１',
+      characterPositionX: size.x / 3,
+      characterPositionY: size.y / 3,
+    )
+      ..animation = character2Animation
+      ..size = Vector2(32, 48) // キャラクターサイズを設定
+      ..position = Vector2(size.x / 3, size.y / 3); // 初期位置を画面中央に設定
 
-    // members[user.id] = Member(user: user, spriteComponent: character);
-    // add(character);
+    members[user.id] = Member(user: user, spriteComponent: character);
+    add(character);
   }
 
   Future<void> updateLocation(Location location) async {
+    print("updateLocation");
     members[location.userId]!.spriteComponent.position =
         getRelativePosition(GPSPoint(location.latitude, location.longitude));
   }
@@ -230,7 +238,6 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
   @override
   void update(double dt) {
     super.update(dt);
-    print('update');
     // ターゲット位置がない場合のみジョイスティック入力を反映
     if (targetPosition == null && joystick.delta != Vector2.zero()) {
       final delta = joystick.delta;
@@ -253,7 +260,7 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
       // キャラクターを移動させる
       me.position += delta * moveSpeed * dt;
 
-      // ターゲット位置が設定されている場合、そこへスムーズに移動
+      // // ターゲット位置が設定されている場合、そこへスムーズに移動
       Future.delayed(Duration(seconds: 3), () {
         if (targetPosition == null) {
           targetPosition = Vector2(size.x / 2, size.y / 2);
