@@ -6,8 +6,9 @@ part 'login_state.freezed.dart';
 class LoginState with _$LoginState {
   const factory LoginState({
     @Default('') String name,
-    @Default('') String email,
-    @Default('') String password,
+    @Default('') String SnsLink,
+    @Default('') String thumbnail,
+    @Default('') String product,
   }) = _LoginState;
   const LoginState._();
 }

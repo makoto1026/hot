@@ -1,3 +1,4 @@
+import 'package:hub_of_talking/features/login/domain/model/login_request.dart';
 import 'package:hub_of_talking/features/user/domain/user.dart';
 import 'package:hub_of_talking/features/user/infrastructure/user_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -42,33 +43,31 @@ class ImplUserRepository implements UserRepository {
     }
   }
 
-  /// ユーザーのメタデータをDBにアップデート
   @override
-  Future<void> updateUserProfileFromMetadata() async {
+  Future<void> updateUser({required User user}) async {
     try {
-      final user = _supabase.auth.currentUser;
-
-      if (user != null) {
-        final metadata = user.userMetadata;
-
-        // メタデータから必要な情報を取り出す
-        final name = metadata?['display_name'] as String? ?? '';
-        final snsUrl = metadata?['sns_url'] as String? ?? '';
-        final image = metadata?['image'] as String? ?? '';
-        final product = metadata?['product'] as String? ?? '';
-
-        // profilesテーブルにデータを保存または更新
-        final response = await _supabase.from('users').upsert({
-          'id': user.id,
-          'display_name': name,
-          'sns_url': snsUrl,
-          'thumbnail': image,
-          'product': product,
-        });
-        print('User profile updated: $response');
-      }
+      await _supabase.from('users').update({
+        'display_name': user.name,
+        'sns_url': user.snsUrl,
+        'thumbnail': user.thumbnail,
+        'product': user.product,
+      }).eq('id', user.sampleId);
     } catch (e) {
-      print('Error updating user profile from metadata: $e');
+      print('Error updating user profile: $e');
+    }
+  }
+
+  @override
+  Future<void> insertUser({required LoginRequest loginRequest}) async {
+    try {
+      await _supabase.from('users').insert({
+        'display_name': loginRequest.displayName,
+        'sns_url': loginRequest.snsUrl,
+        'thumbnail': loginRequest.thumbnail,
+        'product': loginRequest.product,
+      });
+    } catch (e) {
+      print('Error inserting user profile: $e');
     }
   }
 }

@@ -11,30 +11,28 @@ class ImplLoginRepository implements LoginRepository {
   late final supabase.SupabaseClient _supabase;
 
   @override
-  Future<void> signInAnonymously() async {
+  Future<void> loginAnonymously() async {
     try {
-      final response = await _supabase.auth.signInAnonymously();
-
-      print('response: $response');
+      await _supabase.auth.signInAnonymously();
 
       // 匿名ログインが成功した後にメタデータを更新
       final user = _supabase.auth.currentUser;
 
-      print('user$user');
+      final displayName = user?.appMetadata['display_name'] ?? '';
+      final snsUrl = user?.appMetadata['sns_url'] ?? '';
+      final thumbnail = user?.appMetadata['thumbnail'] ?? '';
+      final product = user?.appMetadata['product'] ?? '';
+
       if (user != null) {
-        final updateResponse = await _supabase.auth.updateUser(
+        await _supabase.auth.updateUser(
           supabase.UserAttributes(
             data: {
-              'display_name': 'test man',
-              'sns_url': 'SNSのURL',
-              'thumbnail': '画像のURL',
-              'product': '製品情報',
+              'display_name': displayName,
+              'sns_url': snsUrl,
+              'thumbnail': thumbnail,
+              'product': product,
             },
           ),
-        );
-        print('User metadata updated: $updateResponse');
-        print(
-          'updateResponse.user?.toJson(): ${updateResponse.user?.toJson()}',
         );
       }
     } catch (e) {

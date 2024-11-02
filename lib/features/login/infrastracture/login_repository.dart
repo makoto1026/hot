@@ -2,5 +2,5 @@
 /// このクラスから継承して、各認証リポジトリを作成します。
 // ignore: one_member_abstracts
 abstract class LoginRepository {
-  Future<void> signInAnonymously();
+  Future<void> loginAnonymously();
 }

@@ -17,8 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LoginState {
   String get name => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
+  String get SnsLink => throw _privateConstructorUsedError;
+  String get thumbnail => throw _privateConstructorUsedError;
+  String get product => throw _privateConstructorUsedError;
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
@@ -33,7 +34,7 @@ abstract class $LoginStateCopyWith<$Res> {
           LoginState value, $Res Function(LoginState) then) =
       _$LoginStateCopyWithImpl<$Res, LoginState>;
   @useResult
-  $Res call({String name, String email, String password});
+  $Res call({String name, String SnsLink, String thumbnail, String product});
 }
 
 /// @nodoc
@@ -52,21 +53,26 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
   @override
   $Res call({
     Object? name = null,
-    Object? email = null,
-    Object? password = null,
+    Object? SnsLink = null,
+    Object? thumbnail = null,
+    Object? product = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+      SnsLink: null == SnsLink
+          ? _value.SnsLink
+          : SnsLink // ignore: cast_nullable_to_non_nullable
               as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
+      thumbnail: null == thumbnail
+          ? _value.thumbnail
+          : thumbnail // ignore: cast_nullable_to_non_nullable
+              as String,
+      product: null == product
+          ? _value.product
+          : product // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -80,7 +86,7 @@ abstract class _$$LoginStateImplCopyWith<$Res>
       __$$LoginStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String email, String password});
+  $Res call({String name, String SnsLink, String thumbnail, String product});
 }
 
 /// @nodoc
@@ -97,21 +103,26 @@ class __$$LoginStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
-    Object? email = null,
-    Object? password = null,
+    Object? SnsLink = null,
+    Object? thumbnail = null,
+    Object? product = null,
   }) {
     return _then(_$LoginStateImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+      SnsLink: null == SnsLink
+          ? _value.SnsLink
+          : SnsLink // ignore: cast_nullable_to_non_nullable
               as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
+      thumbnail: null == thumbnail
+          ? _value.thumbnail
+          : thumbnail // ignore: cast_nullable_to_non_nullable
+              as String,
+      product: null == product
+          ? _value.product
+          : product // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -120,7 +131,11 @@ class __$$LoginStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoginStateImpl extends _LoginState {
-  const _$LoginStateImpl({this.name = '', this.email = '', this.password = ''})
+  const _$LoginStateImpl(
+      {this.name = '',
+      this.SnsLink = '',
+      this.thumbnail = '',
+      this.product = ''})
       : super._();
 
   @override
@@ -128,14 +143,17 @@ class _$LoginStateImpl extends _LoginState {
   final String name;
   @override
   @JsonKey()
-  final String email;
+  final String SnsLink;
   @override
   @JsonKey()
-  final String password;
+  final String thumbnail;
+  @override
+  @JsonKey()
+  final String product;
 
   @override
   String toString() {
-    return 'LoginState(name: $name, email: $email, password: $password)';
+    return 'LoginState(name: $name, SnsLink: $SnsLink, thumbnail: $thumbnail, product: $product)';
   }
 
   @override
@@ -144,13 +162,15 @@ class _$LoginStateImpl extends _LoginState {
         (other.runtimeType == runtimeType &&
             other is _$LoginStateImpl &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.password, password) ||
-                other.password == password));
+            (identical(other.SnsLink, SnsLink) || other.SnsLink == SnsLink) &&
+            (identical(other.thumbnail, thumbnail) ||
+                other.thumbnail == thumbnail) &&
+            (identical(other.product, product) || other.product == product));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, email, password);
+  int get hashCode =>
+      Object.hash(runtimeType, name, SnsLink, thumbnail, product);
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
@@ -164,16 +184,19 @@ class _$LoginStateImpl extends _LoginState {
 abstract class _LoginState extends LoginState {
   const factory _LoginState(
       {final String name,
-      final String email,
-      final String password}) = _$LoginStateImpl;
+      final String SnsLink,
+      final String thumbnail,
+      final String product}) = _$LoginStateImpl;
   const _LoginState._() : super._();
 
   @override
   String get name;
   @override
-  String get email;
+  String get SnsLink;
   @override
-  String get password;
+  String get thumbnail;
+  @override
+  String get product;
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.

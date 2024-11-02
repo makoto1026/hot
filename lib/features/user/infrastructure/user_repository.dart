@@ -1,3 +1,4 @@
+import 'package:hub_of_talking/features/login/domain/model/login_request.dart';
 import 'package:hub_of_talking/features/user/domain/user.dart';
 
 /// サンプルリポジトリの抽象クラスです。
@@ -6,5 +7,6 @@ import 'package:hub_of_talking/features/user/domain/user.dart';
 abstract class UserRepository {
   /// サンプルです
   Future<User> fetchUsers();
-  Future<void> updateUserProfileFromMetadata();
+  Future<void> updateUser({required User user});
+  Future<void> insertUser({required LoginRequest loginRequest});
 }
