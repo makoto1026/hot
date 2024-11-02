@@ -21,6 +21,10 @@ User _$UserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$User {
   String get sampleId => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get thumbnail => throw _privateConstructorUsedError;
+  String get snsUrl => throw _privateConstructorUsedError;
+  String get product => throw _privateConstructorUsedError;
 
   /// Serializes this User to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +40,12 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({String sampleId});
+  $Res call(
+      {String sampleId,
+      String name,
+      String thumbnail,
+      String snsUrl,
+      String product});
 }
 
 /// @nodoc
@@ -55,11 +64,31 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @override
   $Res call({
     Object? sampleId = null,
+    Object? name = null,
+    Object? thumbnail = null,
+    Object? snsUrl = null,
+    Object? product = null,
   }) {
     return _then(_value.copyWith(
       sampleId: null == sampleId
           ? _value.sampleId
           : sampleId // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      thumbnail: null == thumbnail
+          ? _value.thumbnail
+          : thumbnail // ignore: cast_nullable_to_non_nullable
+              as String,
+      snsUrl: null == snsUrl
+          ? _value.snsUrl
+          : snsUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      product: null == product
+          ? _value.product
+          : product // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -72,7 +101,12 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$UserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String sampleId});
+  $Res call(
+      {String sampleId,
+      String name,
+      String thumbnail,
+      String snsUrl,
+      String product});
 }
 
 /// @nodoc
@@ -88,11 +122,31 @@ class __$$UserImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? sampleId = null,
+    Object? name = null,
+    Object? thumbnail = null,
+    Object? snsUrl = null,
+    Object? product = null,
   }) {
     return _then(_$UserImpl(
       sampleId: null == sampleId
           ? _value.sampleId
           : sampleId // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      thumbnail: null == thumbnail
+          ? _value.thumbnail
+          : thumbnail // ignore: cast_nullable_to_non_nullable
+              as String,
+      snsUrl: null == snsUrl
+          ? _value.snsUrl
+          : snsUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      product: null == product
+          ? _value.product
+          : product // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -101,17 +155,30 @@ class __$$UserImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$UserImpl implements _User {
-  const _$UserImpl({required this.sampleId});
+  const _$UserImpl(
+      {required this.sampleId,
+      required this.name,
+      required this.thumbnail,
+      required this.snsUrl,
+      required this.product});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
 
   @override
   final String sampleId;
+  @override
+  final String name;
+  @override
+  final String thumbnail;
+  @override
+  final String snsUrl;
+  @override
+  final String product;
 
   @override
   String toString() {
-    return 'User(sampleId: $sampleId)';
+    return 'User(sampleId: $sampleId, name: $name, thumbnail: $thumbnail, snsUrl: $snsUrl, product: $product)';
   }
 
   @override
@@ -120,12 +187,18 @@ class _$UserImpl implements _User {
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
             (identical(other.sampleId, sampleId) ||
-                other.sampleId == sampleId));
+                other.sampleId == sampleId) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.thumbnail, thumbnail) ||
+                other.thumbnail == thumbnail) &&
+            (identical(other.snsUrl, snsUrl) || other.snsUrl == snsUrl) &&
+            (identical(other.product, product) || other.product == product));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, sampleId);
+  int get hashCode =>
+      Object.hash(runtimeType, sampleId, name, thumbnail, snsUrl, product);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -144,12 +217,25 @@ class _$UserImpl implements _User {
 }
 
 abstract class _User implements User {
-  const factory _User({required final String sampleId}) = _$UserImpl;
+  const factory _User(
+      {required final String sampleId,
+      required final String name,
+      required final String thumbnail,
+      required final String snsUrl,
+      required final String product}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
   String get sampleId;
+  @override
+  String get name;
+  @override
+  String get thumbnail;
+  @override
+  String get snsUrl;
+  @override
+  String get product;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.

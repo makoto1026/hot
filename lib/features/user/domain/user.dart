@@ -4,12 +4,15 @@ part 'user.freezed.dart';
 
 part 'user.g.dart';
 
-/// サンプル情報です。
 @freezed
 class User with _$User {
   /// コンストラクタ
   const factory User({
     required String sampleId,
+    required String name,
+    required String thumbnail,
+    required String snsUrl,
+    required String product,
   }) = _User;
 
   /// JSONからUserに変換します。
