@@ -20,7 +20,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
-  String get sampleId => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get thumbnail => throw _privateConstructorUsedError;
   String get snsUrl => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call(
-      {String sampleId,
+      {String id,
       String name,
       String thumbnail,
       String snsUrl,
@@ -63,16 +63,16 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sampleId = null,
+    Object? id = null,
     Object? name = null,
     Object? thumbnail = null,
     Object? snsUrl = null,
     Object? product = null,
   }) {
     return _then(_value.copyWith(
-      sampleId: null == sampleId
-          ? _value.sampleId
-          : sampleId // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -102,7 +102,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String sampleId,
+      {String id,
       String name,
       String thumbnail,
       String snsUrl,
@@ -121,16 +121,16 @@ class __$$UserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sampleId = null,
+    Object? id = null,
     Object? name = null,
     Object? thumbnail = null,
     Object? snsUrl = null,
     Object? product = null,
   }) {
     return _then(_$UserImpl(
-      sampleId: null == sampleId
-          ? _value.sampleId
-          : sampleId // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -156,7 +156,7 @@ class __$$UserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserImpl implements _User {
   const _$UserImpl(
-      {required this.sampleId,
+      {required this.id,
       required this.name,
       required this.thumbnail,
       required this.snsUrl,
@@ -166,7 +166,7 @@ class _$UserImpl implements _User {
       _$$UserImplFromJson(json);
 
   @override
-  final String sampleId;
+  final String id;
   @override
   final String name;
   @override
@@ -178,7 +178,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(sampleId: $sampleId, name: $name, thumbnail: $thumbnail, snsUrl: $snsUrl, product: $product)';
+    return 'User(id: $id, name: $name, thumbnail: $thumbnail, snsUrl: $snsUrl, product: $product)';
   }
 
   @override
@@ -186,8 +186,7 @@ class _$UserImpl implements _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
-            (identical(other.sampleId, sampleId) ||
-                other.sampleId == sampleId) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
@@ -198,7 +197,7 @@ class _$UserImpl implements _User {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, sampleId, name, thumbnail, snsUrl, product);
+      Object.hash(runtimeType, id, name, thumbnail, snsUrl, product);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -218,7 +217,7 @@ class _$UserImpl implements _User {
 
 abstract class _User implements User {
   const factory _User(
-      {required final String sampleId,
+      {required final String id,
       required final String name,
       required final String thumbnail,
       required final String snsUrl,
@@ -227,7 +226,7 @@ abstract class _User implements User {
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
-  String get sampleId;
+  String get id;
   @override
   String get name;
   @override

@@ -1,4 +1,4 @@
-package com.maliddy.hub_of_talking
+package com.maliddy.hubOfTalking
 
 import io.flutter.embedding.android.FlutterActivity
 

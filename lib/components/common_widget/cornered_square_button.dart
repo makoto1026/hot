@@ -66,11 +66,11 @@ class CorneredSquareButton extends HookConsumerWidget {
 class CorneredSquareButtonStyle {
   const CorneredSquareButtonStyle({
     this.backgroundColor = Colors.white,
-    this.textColor = ColorTheme.black,
+    this.textColor = ColorTheme.white,
   });
   CorneredSquareButtonStyle.primary()
       : this(
-          backgroundColor: ColorTheme.primary,
+          backgroundColor: ColorTheme.white,
           textColor: Colors.white,
         );
   final Color backgroundColor;
@@ -80,11 +80,11 @@ class CorneredSquareButtonStyle {
 class OutlineButtonStyle extends CorneredSquareButtonStyle {
   const OutlineButtonStyle({
     super.backgroundColor,
-    this.borderColor = ColorTheme.placeHolder,
+    this.borderColor = ColorTheme.white,
   });
   OutlineButtonStyle.primary()
       : this(
-          borderColor: ColorTheme.primary,
+          borderColor: ColorTheme.white,
         );
 
   final Color borderColor;

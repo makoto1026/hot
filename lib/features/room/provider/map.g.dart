@@ -1,27 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_notifier.dart';
+part of 'map.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userNotifierHash() => r'ae7039e03ee24eeab348359e613e96fb8e95e5ac';
+String _$mapHash() => r'a91ee091be17ed4cc0133dc6797e7def2b5c4f85';
 
-/// サンプルNotifierです。
-///
-/// Copied from [UserNotifier].
-@ProviderFor(UserNotifier)
-final userNotifierProvider =
-    AutoDisposeAsyncNotifierProvider<UserNotifier, User>.internal(
-  UserNotifier.new,
-  name: r'userNotifierProvider',
+/// See also [Map].
+@ProviderFor(Map)
+final mapProvider = NotifierProvider<Map, void>.internal(
+  Map.new,
+  name: r'mapProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$userNotifierHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$mapHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$UserNotifier = AutoDisposeAsyncNotifier<User>;
+typedef _$Map = Notifier<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

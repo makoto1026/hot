@@ -8,7 +8,7 @@ part 'user.g.dart';
 class User with _$User {
   /// コンストラクタ
   const factory User({
-    required String sampleId,
+    required String id,
     required String name,
     required String thumbnail,
     required String snsUrl,

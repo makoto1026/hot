@@ -14,33 +14,12 @@ class ImplUserRepository implements UserRepository {
   late final supabase.SupabaseClient _supabase;
 
   @override
-  Future<User> fetchUsers() async {
-    try {
-      final response = await _supabase
-          .from('users') // テーブル名
-          .select()
-          .limit(1)
-          .single();
-
-      final sample = User(
-        sampleId: response['id'] as String,
-        name: response['display_name'] as String,
-        thumbnail: response['thumbnail'] as String,
-        snsUrl: response['sns_url'] as String,
-        product: response['product'] as String,
-      );
-
-      return sample;
-    } catch (e) {
-      print('Error fetching samples: $e');
-      return const User(
-        sampleId: '',
-        name: '',
-        thumbnail: '',
-        snsUrl: '',
-        product: '',
-      );
-    }
+  Future<List<User>> fetchUsers() async {
+    final response = await _supabase
+        .from('users') // テーブル名
+        .select()
+        .limit(100);
+    return response.map(User.fromJson).toList();
   }
 
   @override
@@ -51,7 +30,7 @@ class ImplUserRepository implements UserRepository {
         'sns_url': user.snsUrl,
         'thumbnail': user.thumbnail,
         'product': user.product,
-      }).eq('id', user.sampleId);
+      }).eq('id', user.id);
     } catch (e) {
       print('Error updating user profile: $e');
     }
@@ -59,15 +38,11 @@ class ImplUserRepository implements UserRepository {
 
   @override
   Future<void> insertUser({required LoginRequest loginRequest}) async {
-    try {
-      await _supabase.from('users').insert({
-        'display_name': loginRequest.displayName,
-        'sns_url': loginRequest.snsUrl,
-        'thumbnail': loginRequest.thumbnail,
-        'product': loginRequest.product,
-      });
-    } catch (e) {
-      print('Error inserting user profile: $e');
-    }
+    await _supabase.from('users').insert({
+      'display_name': loginRequest.displayName,
+      'sns_url': loginRequest.snsUrl,
+      'thumbnail': loginRequest.thumbnail,
+      'product': loginRequest.product,
+    });
   }
 }

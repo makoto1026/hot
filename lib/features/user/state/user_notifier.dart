@@ -67,7 +67,7 @@ class UserNotifier extends _$UserNotifier {
     final product = user?.appMetadata['product'].toString() ?? '';
     await ref.watch(userRepositoryProvider).fetchUsers();
     return User(
-      sampleId: user?.id ?? '',
+      id: user?.id ?? '',
       name: displayName,
       thumbnail: thumbnail,
       snsUrl: snsUrl,

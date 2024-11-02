@@ -6,7 +6,7 @@ import 'package:hub_of_talking/features/user/domain/user.dart';
 // ignore: one_member_abstracts
 abstract class UserRepository {
   /// サンプルです
-  Future<User> fetchUsers();
   Future<void> updateUser({required User user});
   Future<void> insertUser({required LoginRequest loginRequest});
+  Future<List<User>> fetchUsers();
 }

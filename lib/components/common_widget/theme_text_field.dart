@@ -94,7 +94,7 @@ class ThemeTextField extends HookConsumerWidget {
             hintStyle: Theme.of(context)
                 .textTheme
                 .displaySmall
-                ?.copyWith(color: ColorTheme.placeHolder),
+                ?.copyWith(color: ColorTheme.white),
             enabledBorder: hasError() ? errorBorder(context) : border(context),
             focusedBorder:
                 hasError() ? errorBorder(context) : focusedBorder(context),
