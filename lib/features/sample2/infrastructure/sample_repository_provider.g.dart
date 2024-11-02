@@ -6,7 +6,7 @@ part of 'sample_repository_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$sampleRepositoryHash() => r'e505590cd4bed27ebfb3db6c864363f42909e2a3';
+String _$sampleRepositoryHash() => r'f2f80a3abf75baa9bd65f7f134487f2ba7cd121f';
 
 /// [SampleRepository]を取得します。
 ///
