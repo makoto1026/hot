@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hub_of_talking/components/top_bottom_sheet_tab.dart';
+import 'package:hub_of_talking/features/page/signin/login_page.dart';
 import 'package:hub_of_talking/features/room/room_page.dart';
 import 'package:hub_of_talking/features/user/sample2_page.dart';
 import 'package:hub_of_talking/features/sample3/sample3_page.dart';
@@ -65,6 +66,13 @@ final appRoutes = [
       child: RoomPage(),
     ),
   ),
+  GoRoute(
+    parentNavigatorKey: rootNavigatorKey,
+    path: AppRoutes.login.path,
+    pageBuilder: (context, state) => const MaterialPage(
+      child: LoginPage(),
+    ),
+  ),
 ];
 
 /// アプリのルーティングパスです。
@@ -74,6 +82,9 @@ enum AppRoutes {
 
   /// Roomページ
   room('/room'),
+
+  /// Loginページ
+  login('/login'),
 
   /// サンプルページ2
   sample2('/sample2'),

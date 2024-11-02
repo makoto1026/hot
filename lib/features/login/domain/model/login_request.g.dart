@@ -1,23 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user.dart';
+part of 'login_request.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
-      id: json['id'] as String,
-      name: json['name'] as String,
+_$LoginRequestImpl _$$LoginRequestImplFromJson(Map<String, dynamic> json) =>
+    _$LoginRequestImpl(
+      displayName: json['displayName'] as String,
       thumbnail: json['thumbnail'] as String,
       snsUrl: json['snsUrl'] as String,
       product: json['product'] as String,
     );
 
-Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
+Map<String, dynamic> _$$LoginRequestImplToJson(_$LoginRequestImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
+      'displayName': instance.displayName,
       'thumbnail': instance.thumbnail,
       'snsUrl': instance.snsUrl,
       'product': instance.product,

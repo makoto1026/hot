@@ -24,7 +24,7 @@ class TopPage extends HookConsumerWidget {
             const Gap(16),
             ElevatedButton(
               onPressed: () {
-                context.push(AppRoutes.room.path);
+                context.push(AppRoutes.login.path);
               },
               child: const Text('入室'),
             ),

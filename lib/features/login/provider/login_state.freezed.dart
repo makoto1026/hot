@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'user.dart';
+part of 'login_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,77 +14,61 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-User _$UserFromJson(Map<String, dynamic> json) {
-  return _User.fromJson(json);
-}
-
 /// @nodoc
-mixin _$User {
-  String get id => throw _privateConstructorUsedError;
+mixin _$LoginState {
   String get name => throw _privateConstructorUsedError;
+  String get SnsLink => throw _privateConstructorUsedError;
   String get thumbnail => throw _privateConstructorUsedError;
-  String get snsUrl => throw _privateConstructorUsedError;
   String get product => throw _privateConstructorUsedError;
 
-  /// Serializes this User to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of User
+  /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
+  $LoginStateCopyWith<LoginState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserCopyWith<$Res> {
-  factory $UserCopyWith(User value, $Res Function(User) then) =
-      _$UserCopyWithImpl<$Res, User>;
+abstract class $LoginStateCopyWith<$Res> {
+  factory $LoginStateCopyWith(
+          LoginState value, $Res Function(LoginState) then) =
+      _$LoginStateCopyWithImpl<$Res, LoginState>;
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      String thumbnail,
-      String snsUrl,
-      String product});
+  $Res call({String name, String SnsLink, String thumbnail, String product});
 }
 
 /// @nodoc
-class _$UserCopyWithImpl<$Res, $Val extends User>
-    implements $UserCopyWith<$Res> {
-  _$UserCopyWithImpl(this._value, this._then);
+class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
+    implements $LoginStateCopyWith<$Res> {
+  _$LoginStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of User
+  /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? name = null,
+    Object? SnsLink = null,
     Object? thumbnail = null,
-    Object? snsUrl = null,
     Object? product = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      SnsLink: null == SnsLink
+          ? _value.SnsLink
+          : SnsLink // ignore: cast_nullable_to_non_nullable
+              as String,
       thumbnail: null == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
-              as String,
-      snsUrl: null == snsUrl
-          ? _value.snsUrl
-          : snsUrl // ignore: cast_nullable_to_non_nullable
               as String,
       product: null == product
           ? _value.product
@@ -95,54 +79,46 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
 }
 
 /// @nodoc
-abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
-  factory _$$UserImplCopyWith(
-          _$UserImpl value, $Res Function(_$UserImpl) then) =
-      __$$UserImplCopyWithImpl<$Res>;
+abstract class _$$LoginStateImplCopyWith<$Res>
+    implements $LoginStateCopyWith<$Res> {
+  factory _$$LoginStateImplCopyWith(
+          _$LoginStateImpl value, $Res Function(_$LoginStateImpl) then) =
+      __$$LoginStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      String thumbnail,
-      String snsUrl,
-      String product});
+  $Res call({String name, String SnsLink, String thumbnail, String product});
 }
 
 /// @nodoc
-class __$$UserImplCopyWithImpl<$Res>
-    extends _$UserCopyWithImpl<$Res, _$UserImpl>
-    implements _$$UserImplCopyWith<$Res> {
-  __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
+class __$$LoginStateImplCopyWithImpl<$Res>
+    extends _$LoginStateCopyWithImpl<$Res, _$LoginStateImpl>
+    implements _$$LoginStateImplCopyWith<$Res> {
+  __$$LoginStateImplCopyWithImpl(
+      _$LoginStateImpl _value, $Res Function(_$LoginStateImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of User
+  /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? name = null,
+    Object? SnsLink = null,
     Object? thumbnail = null,
-    Object? snsUrl = null,
     Object? product = null,
   }) {
-    return _then(_$UserImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_$LoginStateImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      SnsLink: null == SnsLink
+          ? _value.SnsLink
+          : SnsLink // ignore: cast_nullable_to_non_nullable
+              as String,
       thumbnail: null == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
-              as String,
-      snsUrl: null == snsUrl
-          ? _value.snsUrl
-          : snsUrl // ignore: cast_nullable_to_non_nullable
               as String,
       product: null == product
           ? _value.product
@@ -153,93 +129,79 @@ class __$$UserImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$UserImpl implements _User {
-  const _$UserImpl(
-      {required this.id,
-      required this.name,
-      required this.thumbnail,
-      required this.snsUrl,
-      required this.product});
 
-  factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
-      _$$UserImplFromJson(json);
+class _$LoginStateImpl extends _LoginState {
+  const _$LoginStateImpl(
+      {this.name = '',
+      this.SnsLink = '',
+      this.thumbnail = '',
+      this.product = ''})
+      : super._();
 
   @override
-  final String id;
-  @override
+  @JsonKey()
   final String name;
   @override
+  @JsonKey()
+  final String SnsLink;
+  @override
+  @JsonKey()
   final String thumbnail;
   @override
-  final String snsUrl;
-  @override
+  @JsonKey()
   final String product;
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, thumbnail: $thumbnail, snsUrl: $snsUrl, product: $product)';
+    return 'LoginState(name: $name, SnsLink: $SnsLink, thumbnail: $thumbnail, product: $product)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UserImpl &&
-            (identical(other.id, id) || other.id == id) &&
+            other is _$LoginStateImpl &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.SnsLink, SnsLink) || other.SnsLink == SnsLink) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
-            (identical(other.snsUrl, snsUrl) || other.snsUrl == snsUrl) &&
             (identical(other.product, product) || other.product == product));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, name, thumbnail, snsUrl, product);
+      Object.hash(runtimeType, name, SnsLink, thumbnail, product);
 
-  /// Create a copy of User
+  /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$UserImplCopyWith<_$UserImpl> get copyWith =>
-      __$$UserImplCopyWithImpl<_$UserImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$UserImplToJson(
-      this,
-    );
-  }
+  _$$LoginStateImplCopyWith<_$LoginStateImpl> get copyWith =>
+      __$$LoginStateImplCopyWithImpl<_$LoginStateImpl>(this, _$identity);
 }
 
-abstract class _User implements User {
-  const factory _User(
-      {required final String id,
-      required final String name,
-      required final String thumbnail,
-      required final String snsUrl,
-      required final String product}) = _$UserImpl;
+abstract class _LoginState extends LoginState {
+  const factory _LoginState(
+      {final String name,
+      final String SnsLink,
+      final String thumbnail,
+      final String product}) = _$LoginStateImpl;
+  const _LoginState._() : super._();
 
-  factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
-
-  @override
-  String get id;
   @override
   String get name;
   @override
-  String get thumbnail;
+  String get SnsLink;
   @override
-  String get snsUrl;
+  String get thumbnail;
   @override
   String get product;
 
-  /// Create a copy of User
+  /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UserImplCopyWith<_$UserImpl> get copyWith =>
+  _$$LoginStateImplCopyWith<_$LoginStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
