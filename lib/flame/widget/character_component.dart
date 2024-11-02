@@ -5,7 +5,7 @@ import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
 
 /// キャラクターコンポーネント
-class CharacterComponent extends SpriteComponent with TapCallbacks {
+class CharacterComponent extends SpriteAnimationComponent with TapCallbacks {
   /// コンストラクタ
   CharacterComponent({
     required this.name,

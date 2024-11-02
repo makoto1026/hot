@@ -29,19 +29,34 @@ final GPSPoint bottomRight = GPSPoint(35.6850, 139.7000); // 右下
 const double mapWidth = 500;
 const double mapHeight = 500;
 
-class AppFlame extends FlameGame with TapDetector {
+class AppFlame extends FlameGame with TapDetector, HasGameRef {
   /// マップ
   late SpriteComponent map;
 
   /// キャラクター
-  late SpriteComponent me;
+  late SpriteAnimationComponent me;
+  late SpriteAnimationComponent character2;
+  late SpriteAnimationComponent character3;
   late Map<UserId, Member> members = {};
 
   /// ジョイスティック
   late JoystickComponent joystick;
 
   /// 移動速度
-  final double moveSpeed = 4;
+  final double moveSpeed = 2.5;
+  final double returnSpeed = 2.5;
+
+  /// アニメーションとアイドル画像
+  late Sprite idleSprite;
+  late SpriteAnimation walkUpAnimation;
+  late SpriteAnimation walkDownAnimation;
+  late SpriteAnimation walkLeftAnimation;
+  late SpriteAnimation walkRightAnimation;
+
+  // ターゲット位置と移動中フラグ
+  Vector2? targetPosition;
+  double elapsedTime = 0;
+  double returnDuration = 0; // 戻りにかかる時間
 
 // 現在位置を部屋の四隅を基準に擬似マップ上の相対位置に変換する関数
   Vector2 getRelativePosition(GPSPoint currentPosition) {
@@ -68,14 +83,71 @@ class AppFlame extends FlameGame with TapDetector {
       ..size = size;
     add(map);
 
+    // アイドル状態の画像（待機状態）
+    idleSprite = await loadSprite('character.png'); // idle.png はアイドル状態の画像
+
+    // 歩行アニメーションの読み込みと設定
+    final spriteSheet = await images.load('cat.png'); // 添付された歩行アニメーションスプライトシート
+    walkUpAnimation = SpriteAnimation.fromFrameData(
+      spriteSheet,
+      SpriteAnimationData.sequenced(
+        amount: 3, // フレーム数 (例: スプライトシートに4フレームある場合)
+        stepTime: 0.3, // 各フレームの表示時間
+        textureSize: Vector2(32, 48), // 各フレームのサイズ
+        texturePosition: Vector2(0, 144),
+      ),
+    );
+
+    walkDownAnimation = SpriteAnimation.fromFrameData(
+      spriteSheet,
+      SpriteAnimationData.sequenced(
+        amount: 3, // フレーム数 (例: スプライトシートに4フレームある場合)
+        stepTime: 0.3, // 各フレームの表示時間
+        textureSize: Vector2(32, 48), // 各フレームのサイズ
+        texturePosition: Vector2(0, 0),
+      ),
+    );
+
+    walkLeftAnimation = SpriteAnimation.fromFrameData(
+      spriteSheet,
+      SpriteAnimationData.sequenced(
+        amount: 3, // フレーム数 (例: スプライトシートに4フレームある場合)
+        stepTime: 0.3, // 各フレームの表示時間
+        textureSize: Vector2(32, 48), // 各フレームのサイズ
+        texturePosition: Vector2(0, 48),
+      ),
+    );
+
+    walkRightAnimation = SpriteAnimation.fromFrameData(
+      spriteSheet,
+      SpriteAnimationData.sequenced(
+        amount: 3, // フレーム数 (例: スプライトシートに4フレームある場合)
+        stepTime: 0.3, // 各フレームの表示時間
+        textureSize: Vector2(32, 48), // 各フレームのサイズ
+        texturePosition: Vector2(0, 96),
+      ),
+    );
+
+    final character3SpriteSheet =
+        await images.load('character_3.png'); // 添付された歩行アニメーションスプライトシート
+    final character3Animation = SpriteAnimation.fromFrameData(
+      character3SpriteSheet,
+      SpriteAnimationData.sequenced(
+        amount: 3, // フレーム数 (例: スプライトシートに4フレームある場合)
+        stepTime: 0.1, // 各フレームの表示時間
+        textureSize: Vector2(32, 48), // 各フレームのサイズ
+      ),
+    );
+
     // // キャラクターの読み込みと表示
     me = CharacterComponent(
       name: 'じぶん',
       characterPositionX: size.x / 2,
       characterPositionY: size.y / 2,
     )
-      ..sprite = await loadSprite('character.png')
-      ..size = Vector2(32, 32) // キャラクターサイズを設定
+      ..animation =
+          SpriteAnimation.spriteList([idleSprite], stepTime: double.infinity)
+      ..size = Vector2(32, 48) // キャラクターサイズを設定
       ..position = Vector2(size.x / 2, size.y / 2); // 初期位置を画面中央に設定
 
     // // キャラクターの読み込みと表示
@@ -115,27 +187,39 @@ class AppFlame extends FlameGame with TapDetector {
 
     add(joystick);
 
-    /// myCharacterを画面の一番上に表示する
+    /// meを画面の一番上に表示する
     me.priority = 1;
   }
 
+  /// メンバー追加
   Future<void> addMember(User user) async {
-    //もし存在してたら何もしない
-    if (members.containsKey(user.id)) {
-      return;
-    }
+    // TODO(tera): onLoadedとの兼ね合いでこのままだと動かない
+    // //もし存在してたら何もしない
+    // if (members.containsKey(user.id)) {
+    //   return;
+    // }
+    // final character2SpriteSheet =
+    //     await images.load('character_2.png'); // 添付された歩行アニメーションスプライトシート
+    // final character2Animation = SpriteAnimation.fromFrameData(
+    //   character2SpriteSheet,
+    //   SpriteAnimationData.sequenced(
+    //     amount: 3, // フレーム数 (例: スプライトシートに4フレームある場合)
+    //     stepTime: 0.1, // 各フレームの表示時間
+    //     textureSize: Vector2(32, 48), // 各フレームのサイズ
+    //   ),
+    // );
 
-    final character = CharacterComponent(
-      name: '友だち１',
-      characterPositionX: size.x / 3,
-      characterPositionY: size.y / 3,
-    )
-      ..sprite = await loadSprite('character_2.png')
-      ..size = Vector2(32, 32) // キャラクターサイズを設定
-      ..position = Vector2(size.x / 3, size.y / 3); // 初期位置を画面中央に設定
+    // final character = CharacterComponent(
+    //   name: '友だち１',
+    //   characterPositionX: size.x / 3,
+    //   characterPositionY: size.y / 3,
+    // )
+    //   ..animation = character2Animation
+    //   ..size = Vector2(32, 48) // キャラクターサイズを設定
+    //   ..position = Vector2(size.x / 3, size.y / 3); // 初期位置を画面中央に設定
 
-    members[user.id] = Member(user: user, spriteComponent: character);
-    add(character);
+    // members[user.id] = Member(user: user, spriteComponent: character);
+    // add(character);
   }
 
   Future<void> updateLocation(Location location) async {
@@ -147,7 +231,55 @@ class AppFlame extends FlameGame with TapDetector {
   void update(double dt) {
     super.update(dt);
     print('update');
-    me.position += joystick.delta * moveSpeed * 0.01;
+    // ターゲット位置がない場合のみジョイスティック入力を反映
+    if (targetPosition == null && joystick.delta != Vector2.zero()) {
+      final delta = joystick.delta;
+
+      // キャラクターの向きを判定してアニメーションを設定
+      if (delta.x.abs() > delta.y.abs()) {
+        if (delta.x < 0) {
+          me.animation = walkLeftAnimation;
+        } else {
+          me.animation = walkRightAnimation;
+        }
+      } else {
+        if (delta.y < 0) {
+          me.animation = walkUpAnimation;
+        } else {
+          me.animation = walkDownAnimation;
+        }
+      }
+
+      // キャラクターを移動させる
+      me.position += delta * moveSpeed * dt;
+
+      // ターゲット位置が設定されている場合、そこへスムーズに移動
+      Future.delayed(Duration(seconds: 3), () {
+        if (targetPosition == null) {
+          targetPosition = Vector2(size.x / 2, size.y / 2);
+          elapsedTime = 0;
+
+          // 距離に基づいて戻りにかかる時間を計算
+          double distance = me.position.distanceTo(targetPosition!);
+          returnDuration = distance / returnSpeed; // 距離と速度から時間を計算
+        }
+      });
+    } else if (joystick.delta == Vector2.zero() && targetPosition == null) {
+      // ジョイスティックの入力がない場合はアイドル状態に戻す
+      me.animation =
+          SpriteAnimation.spriteList([idleSprite], stepTime: double.infinity);
+    }
+
+    if (targetPosition != null) {
+      elapsedTime += dt;
+      final t = (elapsedTime / returnDuration).clamp(0, 1);
+
+      // カスタム線形補間を使用して位置をスムーズに更新
+      me.position = Vector2(
+        me.position.x + (targetPosition!.x - me.position.x) * t,
+        me.position.y + (targetPosition!.y - me.position.y) * t,
+      );
+    }
   }
 
   /// X座標、Y座標を指定してキャラクターの位置を設定します。
