@@ -50,6 +50,17 @@ class $AssetsAppIconGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/button_bg.png
+  AssetGenImage get buttonBg =>
+      const AssetGenImage('assets/images/button_bg.png');
+
+  /// File path: assets/images/camera.png
+  AssetGenImage get camera => const AssetGenImage('assets/images/camera.png');
+
+  /// File path: assets/images/campfire.png
+  AssetGenImage get campfire =>
+      const AssetGenImage('assets/images/campfire.png');
+
   /// File path: assets/images/cat.png
   AssetGenImage get cat => const AssetGenImage('assets/images/cat.png');
 
@@ -68,6 +79,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/exit.png
   AssetGenImage get exit => const AssetGenImage('assets/images/exit.png');
 
+  /// File path: assets/images/icon_frame.png
+  AssetGenImage get iconFrame =>
+      const AssetGenImage('assets/images/icon_frame.png');
+
   /// File path: assets/images/man.png
   AssetGenImage get man => const AssetGenImage('assets/images/man.png');
 
@@ -84,11 +99,15 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
+        buttonBg,
+        camera,
+        campfire,
         cat,
         character,
         character2,
         character3,
         exit,
+        iconFrame,
         man,
         manIdle,
         manWalk,
