@@ -223,6 +223,7 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
       thumbnail: 'thumbnail',
       snsUrl: 'snsUrl',
       product: 'product',
+      deviceId: 'deviceId',
     );
 
     // // キャラクターの読み込みと表示
@@ -271,10 +272,14 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
         radius: 45,
         paint: BasicPalette.white.withAlpha(100).paint(),
       ),
-      margin: const EdgeInsets.only(left: 16, bottom: 16),
+      position: Vector2(size.x / 2, size.y - 100),
     );
 
     add(joystick);
+
+    gameRef.world.add(map);
+    gameRef.world.add(me);
+    camera.viewport.add(joystick);
 
     /// meを画面の一番上に表示する
     me.priority = 1;
@@ -309,7 +314,7 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
       ..position = Vector2(size.x / 3, size.y / 3); // 初期位置を画面中央に設定
 
     members[user.id] = Member(user: user, spriteComponent: character);
-    add(character);
+    gameRef.world.add(character);
   }
 
   Future<void> updateLocation(Location location) async {
