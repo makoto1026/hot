@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:hub_of_talking/features/page/login_accept_page.dart';
 import 'package:hub_of_talking/features/page/login_page.dart';
 import 'package:hub_of_talking/features/page/room_page.dart';
 import 'package:hub_of_talking/features/page/top_page.dart';
@@ -69,7 +68,7 @@ final appRoutes = [
     parentNavigatorKey: rootNavigatorKey,
     path: AppRoutes.loginAccept.path,
     pageBuilder: (context, state) => const MaterialPage(
-      child: LoginAcceptPage(),
+      child: SizedBox(),
     ),
   ),
 ];
