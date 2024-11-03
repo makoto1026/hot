@@ -61,20 +61,9 @@ class $AssetsImagesGen {
   AssetGenImage get campfire =>
       const AssetGenImage('assets/images/campfire.png');
 
-  /// File path: assets/images/cat.png
-  AssetGenImage get cat => const AssetGenImage('assets/images/cat.png');
-
   /// File path: assets/images/character.png
   AssetGenImage get character =>
       const AssetGenImage('assets/images/character.png');
-
-  /// File path: assets/images/character_2.png
-  AssetGenImage get character2 =>
-      const AssetGenImage('assets/images/character_2.png');
-
-  /// File path: assets/images/character_3.png
-  AssetGenImage get character3 =>
-      const AssetGenImage('assets/images/character_3.png');
 
   /// File path: assets/images/exit.png
   AssetGenImage get exit => const AssetGenImage('assets/images/exit.png');
@@ -97,21 +86,28 @@ class $AssetsImagesGen {
   /// File path: assets/images/map.png
   AssetGenImage get map => const AssetGenImage('assets/images/map.png');
 
+  /// File path: assets/images/placeholder.png
+  AssetGenImage get placeholder =>
+      const AssetGenImage('assets/images/placeholder.png');
+
+  /// File path: assets/images/white_border.png
+  AssetGenImage get whiteBorder =>
+      const AssetGenImage('assets/images/white_border.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         buttonBg,
         camera,
         campfire,
-        cat,
         character,
-        character2,
-        character3,
         exit,
         iconFrame,
         man,
         manIdle,
         manWalk,
-        map
+        map,
+        placeholder,
+        whiteBorder
       ];
 }
 

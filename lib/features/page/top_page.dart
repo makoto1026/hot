@@ -55,7 +55,7 @@ class TopPage extends HookConsumerWidget {
             AcceptButton(
               label: 'はじめる',
               onPressed: () {
-                context.push(AppRoutes.login.path);
+                context.push(AppRoutes.room.path);
               },
             ),
           ],

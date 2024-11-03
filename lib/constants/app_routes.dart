@@ -5,7 +5,6 @@ import 'package:hub_of_talking/features/page/login_page.dart';
 import 'package:hub_of_talking/features/page/room_page.dart';
 import 'package:hub_of_talking/features/page/top_page.dart';
 import 'package:hub_of_talking/features/page/web_view_page.dart';
-import 'package:hub_of_talking/sample_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// アプリのルーティングです。

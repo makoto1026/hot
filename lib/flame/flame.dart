@@ -4,8 +4,6 @@ import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:go_router/go_router.dart';
-import 'package:hub_of_talking/constants/app_routes.dart';
 import 'package:hub_of_talking/features/location/domain/model/location.dart';
 import 'package:hub_of_talking/features/page/web_view_page.dart';
 import 'package:hub_of_talking/features/user/domain/model/user.dart';
@@ -17,31 +15,49 @@ typedef UserId = String;
 /// フレーム
 // 部屋の四隅の座標
 class GPSPoint {
+  /// コンストラクタ
   GPSPoint(this.latitude, this.longitude);
+
+  /// 緯度
   final double latitude;
+
+  /// 経度
   final double longitude;
 }
 
-// 部屋の四隅の座標を指定
-final GPSPoint topLeft = GPSPoint(35.66244977971531, 139.69611780001182); // 左上
-final GPSPoint topRight = GPSPoint(35.66244977971531, 139.6961201177803); // 右上
-final GPSPoint bottomLeft =
-    GPSPoint(35.66243408820496, 139.69608109696554); // 左下
-final GPSPoint bottomRight =
-    GPSPoint(35 / 662432616337284, 139.69607877919705); // 右下
+/// 部屋の四隅の座標を指定
+final GPSPoint topLeft = GPSPoint(35.66244977971531, 139.69611780001182);
 
-// 擬似マップの大きさ（ピクセル単位）
+/// 右上
+final GPSPoint topRight = GPSPoint(35.66244977971531, 139.6961201177803);
+
+/// 左下
+final GPSPoint bottomLeft = GPSPoint(35.66243408820496, 139.69608109696554);
+
+/// 右下
+final GPSPoint bottomRight = GPSPoint(35 / 662432616337284, 139.69607877919705);
+
+/// 擬似マップの大きさ（ピクセル単位）
 const double mapWidth = 1231;
+
+/// 擬似マップの大きさ（ピクセル単位）
 const double mapHeight = 1112;
 
+/// フレーム
 class AppFlame extends FlameGame with TapDetector, HasGameRef {
   /// マップ
   late SpriteComponent map;
 
   /// キャラクター
   late SpriteAnimationComponent me;
+
+  /// キャラクター
   late SpriteAnimationComponent character2;
+
+  /// キャラクター
   late SpriteAnimationComponent character3;
+
+  /// キャラクター
   late Map<UserId, Member> members = {};
 
   /// ジョイスティック
@@ -49,6 +65,8 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
 
   /// 移動速度
   final double moveSpeed = 2.5;
+
+  /// 戻り速度
   final double returnSpeed = 2.5;
 
   /// アニメーションとアイドル画像
@@ -84,7 +102,6 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
     return Vector2(relativeX, relativeY);
   }
 
-  // TODO(tera): 別の場所に移動する必要あるかも
   /// ユーザー情報ダイアログを表示
   void showUserInfoDialog(User user) {
     // FlutterのshowDialogを使用してユーザー情報ダイアログを表示
@@ -224,7 +241,7 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
     const user = User(
       id: '1',
       displayName: 'じぶん',
-      thumbnail: 'thumbnail',
+      thumbnail: 'https://placehold.jp/50x50.png',
       snsUrl: 'snsUrl',
       product: 'product',
       deviceId: 'deviceId',
@@ -236,6 +253,7 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
       characterPositionX: size.x / 2,
       characterPositionY: size.y / 2,
       onTap: () => showUserInfoDialog(user),
+      isMe: true,
     )
       ..animation = SpriteAnimation.spriteList(
         [idleSprite],
@@ -243,29 +261,6 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
       )
       ..size = Vector2(32, 48) // キャラクターサイズを設定
       ..position = Vector2(size.x / 2, size.y / 2); // 初期位置を画面中央に設定
-
-    // // キャラクターの読み込みと表示
-    // character2 = CharacterComponent(
-    //   name: '友だち１',
-    //   characterPositionX: size.x / 3,
-    //   characterPositionY: size.y / 3,
-    // )
-    //   ..sprite = await loadSprite('character_2.png')
-    //   ..size = Vector2(32, 32) // キャラクターサイズを設定
-    //   ..position = Vector2(size.x / 3, size.y / 3); // 初期位置を画面中央に設定
-
-    // // キャラクターの読み込みと表示
-    // character3 = CharacterComponent(
-    //   name: '友だち２',
-    //   characterPositionX: size.x / 1.5,
-    //   characterPositionY: size.y / 1.5,
-    // )
-    //   ..sprite = await loadSprite('character_3.png')
-    //   ..size = Vector2(32, 32) // キャラクターサイズを設定
-    //   ..position = Vector2(size.x / 1.5, size.y / 1.5); // 初期位置を画面中央に設定
-
-    // add(character2);
-    // add(character3);
 
     // TODO(tera): 不要になるので消す。イメージしやすいようにセットしているだけです。
     // ジョイスティックの追加
@@ -306,6 +301,7 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
       characterPositionX: size.x / 3,
       characterPositionY: size.y / 3,
       onTap: () => showUserInfoDialog(user),
+      overlayImageUrl: user.thumbnail,
     )
       ..animation = SpriteAnimation.spriteList(
         [memberIdleSprite],
