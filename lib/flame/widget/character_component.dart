@@ -36,7 +36,7 @@ class CharacterComponent extends SpriteAnimationComponent with TapCallbacks {
       textRenderer: TextPaint(
         style: const TextStyle(
           color: Colors.white,
-          fontSize: 14,
+          fontSize: 16,
           fontWeight: FontWeight.bold,
         ),
       ),

@@ -163,7 +163,6 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
     map = SpriteComponent()
       ..sprite = mapSprite
       ..size = mapSprite.srcSize;
-    add(map);
 
     // アイドル状態の画像（待機状態）
     idleSprite = await loadSprite('man.png'); // idle.png はアイドル状態の画像
@@ -265,7 +264,6 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
     //   ..size = Vector2(32, 32) // キャラクターサイズを設定
     //   ..position = Vector2(size.x / 1.5, size.y / 1.5); // 初期位置を画面中央に設定
 
-    add(me);
     // add(character2);
     // add(character3);
 
@@ -279,8 +277,6 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
       ),
       position: Vector2(size.x / 2, size.y - 100),
     );
-
-    add(joystick);
 
     gameRef.world.add(map);
     gameRef.world.add(me);
