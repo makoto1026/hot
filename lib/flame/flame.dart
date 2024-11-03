@@ -253,7 +253,7 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
       characterPositionX: size.x / 2,
       characterPositionY: size.y / 2,
       onTap: () => showUserInfoDialog(user),
-      overlayImageUrl: user.thumbnail,
+      isMe: true,
     )
       ..animation = SpriteAnimation.spriteList(
         [idleSprite],

@@ -16,6 +16,7 @@ class CharacterComponent extends SpriteAnimationComponent
     required this.characterPositionY,
     required this.onTap,
     this.overlayImageUrl,
+    this.isMe = false,
   });
 
   /// キャラクターの名前
@@ -42,6 +43,9 @@ class CharacterComponent extends SpriteAnimationComponent
   /// 縁取り用のスプライトコンポーネント
   SpriteComponent? borderImageComponent;
 
+  /// 自分自身かどうか
+  final bool isMe;
+
   @override
   Future<void> onLoad() async {
     super.onLoad();
@@ -57,37 +61,39 @@ class CharacterComponent extends SpriteAnimationComponent
       ),
     )
       ..anchor = Anchor.center
-      ..position = Vector2(15, -55);
+      ..position = Vector2(15, isMe ? -15 : -55);
     add(nameText);
 
-    // 縁取り画像の追加
-    final borderSprite = await Sprite.load('white_border.png');
-    borderImageComponent = SpriteComponent()
-      ..sprite = borderSprite
-      ..size = Vector2(60, 60)
-      ..position = Vector2(-15, -40);
-    add(borderImageComponent!);
-
-    // タップ検知用のヒットボックスを追加
-    add(
-      RectangleHitbox()
+    if (!isMe) {
+      // 縁取り画像の追加
+      final borderSprite = await Sprite.load('white_border.png');
+      borderImageComponent = SpriteComponent()
+        ..sprite = borderSprite
         ..size = Vector2(60, 60)
-        ..anchor = Anchor.center,
-    );
+        ..position = Vector2(-15, -40);
+      add(borderImageComponent!);
 
-    // ネットワーク画像の読み込みとエラーハンドリング
-    Sprite overlaySprite;
-    try {
-      overlaySprite = await _loadNetworkSprite(overlayImageUrl);
-    } catch (_) {
-      overlaySprite = await Sprite.load('placeholder.png'); // プレースホルダー画像
+      // タップ検知用のヒットボックスを追加
+      add(
+        RectangleHitbox()
+          ..size = Vector2(60, 60)
+          ..anchor = Anchor.center,
+      );
+
+      // ネットワーク画像の読み込みとエラーハンドリング
+      Sprite overlaySprite;
+      try {
+        overlaySprite = await _loadNetworkSprite(overlayImageUrl);
+      } catch (_) {
+        overlaySprite = await Sprite.load('placeholder.png'); // プレースホルダー画像
+      }
+
+      overlayImageComponent = SpriteComponent()
+        ..sprite = overlaySprite
+        ..size = Vector2(50, 50)
+        ..position = Vector2(-10, -35);
+      add(overlayImageComponent!);
     }
-
-    overlayImageComponent = SpriteComponent()
-      ..sprite = overlaySprite
-      ..size = Vector2(50, 50)
-      ..position = Vector2(-10, -35);
-    add(overlayImageComponent!);
   }
 
   /// ネットワーク画像の読み込み処理
