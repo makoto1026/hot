@@ -12,6 +12,7 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       thumbnail: json['thumbnail'] as String,
       snsUrl: json['sns_url'] as String,
       product: json['product'] as String,
+      deviceId: json['device_id'] as String,
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
@@ -21,4 +22,5 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'thumbnail': instance.thumbnail,
       'sns_url': instance.snsUrl,
       'product': instance.product,
+      'device_id': instance.deviceId,
     };

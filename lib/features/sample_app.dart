@@ -25,6 +25,7 @@ class SampleApp extends HookConsumerWidget {
     );
     return MaterialApp.router(
       title: 'HUB OF TALKING',
+      color: Colors.blue,
       theme: ref.watch(lightThemeProvider),
       debugShowCheckedModeBanner: false,
       routeInformationProvider: router.routeInformationProvider,

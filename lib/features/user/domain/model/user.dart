@@ -15,6 +15,7 @@ class User with _$User {
     required String thumbnail,
     required String snsUrl,
     required String product,
+    required String deviceId,
   }) = _User;
 
   /// JSONからUserに変換します。
