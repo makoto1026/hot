@@ -12,15 +12,17 @@ class LoginPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final formKey = useMemoized(GlobalKey<FormState>.new, []);
-    final user = ref.watch(loginProvider);
+    final state = ref.watch(loginProvider);
+    final nameController = useTextEditingController();
+    final productController = useTextEditingController();
+    final snsLinkController = useTextEditingController();
 
     Future<void> loginAnonymously() async {
       try {
         if (formKey.currentState?.validate() ?? false) {
-          ref.read(loginProvider.notifier).login();
+          await ref.read(loginProvider.notifier).login();
+          await context.push(AppRoutes.room.path);
         }
-
-        await context.push(AppRoutes.room.path);
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Update failed: $e')),
@@ -28,6 +30,14 @@ class LoginPage extends HookConsumerWidget {
       }
     }
 
+    state.maybeWhen(
+      data: (state) {
+        nameController.text = state.name;
+        productController.text = state.product;
+        snsLinkController.text = state.snsLink;
+      },
+      orElse: () => {},
+    );
     return Scaffold(
       appBar: AppBar(
         title: const Text('新規登録'),
@@ -41,6 +51,7 @@ class LoginPage extends HookConsumerWidget {
               TextFormField(
                 onChanged: ref.watch(loginProvider.notifier).setName,
                 decoration: const InputDecoration(labelText: 'Name'),
+                controller: nameController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Name cannot be empty';
@@ -51,6 +62,7 @@ class LoginPage extends HookConsumerWidget {
               TextFormField(
                 onChanged: ref.watch(loginProvider.notifier).setProduct,
                 decoration: const InputDecoration(labelText: 'Product Name'),
+                controller: productController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Product name cannot be empty';
@@ -75,6 +87,7 @@ class LoginPage extends HookConsumerWidget {
               TextFormField(
                 onChanged: ref.watch(loginProvider.notifier).setSnsLink,
                 decoration: const InputDecoration(labelText: 'SNS Link'),
+                controller: snsLinkController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'SNS Link cannot be empty';
@@ -88,10 +101,14 @@ class LoginPage extends HookConsumerWidget {
                 },
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: loginAnonymously,
-                child: const Text('Sign in Anonymously'),
-              ),
+              ref.watch(loginProvider).maybeWhen(
+                    loading: () => const CircularProgressIndicator(),
+                    orElse: () => const SizedBox.shrink(),
+                    data: (state) => ElevatedButton(
+                      onPressed: loginAnonymously,
+                      child: const Text('はじめる'),
+                    ),
+                  ),
             ],
           ),
         ),

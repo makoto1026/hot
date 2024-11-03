@@ -23,10 +23,12 @@ class GPSPoint {
 }
 
 // 部屋の四隅の座標を指定
-final GPSPoint topLeft = GPSPoint(35.6895, 139.6917); // 左上
-final GPSPoint topRight = GPSPoint(35.6895, 139.7000); // 右上
-final GPSPoint bottomLeft = GPSPoint(35.6850, 139.6917); // 左下
-final GPSPoint bottomRight = GPSPoint(35.6850, 139.7000); // 右下
+final GPSPoint topLeft = GPSPoint(35.66244977971531, 139.69611780001182); // 左上
+final GPSPoint topRight = GPSPoint(35.66244977971531, 139.6961201177803); // 右上
+final GPSPoint bottomLeft =
+    GPSPoint(35.66243408820496, 139.69608109696554); // 左下
+final GPSPoint bottomRight =
+    GPSPoint(35 / 662432616337284, 139.69607877919705); // 右下
 
 // 擬似マップの大きさ（ピクセル単位）
 const double mapWidth = 500;
