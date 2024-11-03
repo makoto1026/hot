@@ -76,6 +76,9 @@ class $AssetsImagesGen {
   AssetGenImage get character3 =>
       const AssetGenImage('assets/images/character_3.png');
 
+  /// File path: assets/images/exit.png
+  AssetGenImage get exit => const AssetGenImage('assets/images/exit.png');
+
   /// File path: assets/images/icon_frame.png
   AssetGenImage get iconFrame =>
       const AssetGenImage('assets/images/icon_frame.png');
@@ -103,6 +106,7 @@ class $AssetsImagesGen {
         character,
         character2,
         character3,
+        exit,
         iconFrame,
         man,
         manIdle,

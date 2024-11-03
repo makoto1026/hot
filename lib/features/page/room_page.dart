@@ -18,7 +18,23 @@ class RoomPage extends StatelessWidget {
       },
       child: Scaffold(
         backgroundColor: Colors.green[50],
-        body: const MapSpace(),
+        body: Stack(
+          children: [
+            const MapSpace(),
+            Positioned(
+              top: 60,
+              right: 20,
+              child: InkWell(
+                onTap: () => context.pop(),
+                child: const Image(
+                  image: AssetImage('assets/images/exit.png'),
+                  width: 50,
+                  height: 50,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

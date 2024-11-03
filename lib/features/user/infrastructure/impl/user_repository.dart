@@ -28,7 +28,7 @@ class ImplUserRepository implements UserRepository {
       await _supabase
           .from('users')
           .update(user.toJson())
-          .eq('deviceId', user.deviceId);
+          .eq('device_id', user.deviceId);
     } catch (e) {
       print('Error updating user profile: $e');
     }

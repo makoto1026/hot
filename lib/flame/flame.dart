@@ -31,8 +31,8 @@ final GPSPoint bottomRight =
     GPSPoint(35 / 662432616337284, 139.69607877919705); // 右下
 
 // 擬似マップの大きさ（ピクセル単位）
-const double mapWidth = 500;
-const double mapHeight = 500;
+const double mapWidth = 1231;
+const double mapHeight = 1112;
 
 class AppFlame extends FlameGame with TapDetector, HasGameRef {
   /// マップ
@@ -64,6 +64,7 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
   double elapsedTime = 0;
   double returnDuration = 0; // 戻りにかかる時間
 
+  @override
   bool isLoaded = false;
 
   /// 現在位置を部屋の四隅を基準に擬似マップ上の相対位置に変換する関数
@@ -83,7 +84,7 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
     return Vector2(relativeX, relativeY);
   }
 
-  /// TODO(tera): 別の場所に移動する必要あるかも
+  // TODO(tera): 別の場所に移動する必要あるかも
   /// ユーザー情報ダイアログを表示
   void showUserInfoDialog(User user) {
     // FlutterのshowDialogを使用してユーザー情報ダイアログを表示
@@ -105,35 +106,39 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
                       color: Colors.black,
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).pop(); // ダイアログを閉じる
-                      showModalBottomSheet<String>(
-                        context: context,
-                        isScrollControlled: true,
-                        builder: (BuildContext context) {
-                          return WebViewPage(url: user.snsUrl);
-                        },
-                      );
-                    },
-                    child: Text(
-                      user.snsUrl,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        color: Colors.blue,
-                        decoration: TextDecoration.underline,
-                        decorationColor: Colors.blue,
+                  Flexible(
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pop(); // ダイアログを閉じる
+                        showModalBottomSheet<String>(
+                          context: context,
+                          isScrollControlled: true,
+                          builder: (BuildContext context) {
+                            return WebViewPage(url: user.snsUrl);
+                          },
+                        );
+                      },
+                      child: Text(
+                        user.snsUrl,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
+                          decorationColor: Colors.blue,
+                        ),
                       ),
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 16),
-              Text(
-                '製品: ${user.product}',
-                style: const TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
+              Flexible(
+                child: Text(
+                  'プロダクト: ${user.product}',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ],
@@ -217,12 +222,13 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
       ),
     );
 
-    final user = User(
+    const user = User(
       id: '1',
       displayName: 'じぶん',
       thumbnail: 'thumbnail',
       snsUrl: 'snsUrl',
       product: 'product',
+      deviceId: 'deviceId',
     );
 
     // // キャラクターの読み込みと表示
@@ -271,10 +277,14 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
         radius: 45,
         paint: BasicPalette.white.withAlpha(100).paint(),
       ),
-      margin: const EdgeInsets.only(left: 16, bottom: 16),
+      position: Vector2(size.x / 2, size.y - 100),
     );
 
     add(joystick);
+
+    gameRef.world.add(map);
+    gameRef.world.add(me);
+    camera.viewport.add(joystick);
 
     /// meを画面の一番上に表示する
     me.priority = 1;
@@ -309,12 +319,16 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
       ..position = Vector2(size.x / 3, size.y / 3); // 初期位置を画面中央に設定
 
     members[user.id] = Member(user: user, spriteComponent: character);
-    add(character);
+    gameRef.world.add(character);
   }
 
   Future<void> updateLocation(Location location) async {
-    print("updateLocation");
-    members[location.userId]!.spriteComponent.position =
+    print('updateLocation');
+    print(
+        getRelativePosition(GPSPoint(location.latitude, location.longitude)).x);
+    print(
+        getRelativePosition(GPSPoint(location.latitude, location.longitude)).y);
+    members[location.userId]?.spriteComponent.position =
         getRelativePosition(GPSPoint(location.latitude, location.longitude));
   }
 
@@ -340,8 +354,15 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
         }
       }
 
-      // キャラクターを移動させる
-      me.position += delta * moveSpeed * dt;
+      // 新しい位置を計算
+      Vector2 newPosition = me.position + delta * moveSpeed * dt;
+
+      // マップの境界チェック
+      newPosition.x = newPosition.x.clamp(0, mapWidth - me.size.x);
+      newPosition.y = newPosition.y.clamp(0, mapHeight - me.size.y);
+
+      // キャラクターの位置を更新
+      me.position = newPosition;
 
       // // TODO(tera): positionを自動で更新するコード、後で消す
       // Future.delayed(Duration(seconds: 3), () {
