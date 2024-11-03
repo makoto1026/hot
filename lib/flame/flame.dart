@@ -64,6 +64,7 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
   double elapsedTime = 0;
   double returnDuration = 0; // 戻りにかかる時間
 
+  @override
   bool isLoaded = false;
 
   /// 現在位置を部屋の四隅を基準に擬似マップ上の相対位置に変換する関数
@@ -83,7 +84,7 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
     return Vector2(relativeX, relativeY);
   }
 
-  /// TODO(tera): 別の場所に移動する必要あるかも
+  // TODO(tera): 別の場所に移動する必要あるかも
   /// ユーザー情報ダイアログを表示
   void showUserInfoDialog(User user) {
     // FlutterのshowDialogを使用してユーザー情報ダイアログを表示
@@ -217,7 +218,7 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
       ),
     );
 
-    final user = User(
+    const user = User(
       id: '1',
       displayName: 'じぶん',
       thumbnail: 'thumbnail',
@@ -318,8 +319,12 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
   }
 
   Future<void> updateLocation(Location location) async {
-    print("updateLocation");
-    members[location.userId]!.spriteComponent.position =
+    print('updateLocation');
+    print(
+        getRelativePosition(GPSPoint(location.latitude, location.longitude)).x);
+    print(
+        getRelativePosition(GPSPoint(location.latitude, location.longitude)).y);
+    members[location.userId]?.spriteComponent.position =
         getRelativePosition(GPSPoint(location.latitude, location.longitude));
   }
 
