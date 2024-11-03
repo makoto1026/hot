@@ -14,18 +14,15 @@ class UserIcon extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
+        CachedNetworkImage(
+          imageUrl: imageUrl,
+          height: 100,
+          width: 100,
+          fit: BoxFit.cover,
+        ),
         Assets.images.iconFrame.image(
           height: 110,
           width: 110,
-        ),
-        Container(
-          color: Colors.red,
-          child: CachedNetworkImage(
-            imageUrl: imageUrl, // 外部から渡されたURLを使用
-            height: 100,
-            width: 100,
-            fit: BoxFit.cover,
-          ),
         ),
       ],
     );

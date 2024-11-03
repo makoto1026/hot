@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:hub_of_talking/components/common_widget/accept_button.dart';
 import 'package:hub_of_talking/components/common_widget/automatic_focus_manager.dart';
 import 'package:hub_of_talking/components/common_widget/image_picker.dart';
+import 'package:hub_of_talking/components/common_widget/user_icon.dart';
 import 'package:hub_of_talking/constants/app_routes.dart';
 import 'package:hub_of_talking/features/login/provider/login.dart';
 import 'package:hub_of_talking/gen/assets.gen.dart';
@@ -94,7 +95,7 @@ class LoginPage extends HookConsumerWidget {
                             return Assets.images.camera
                                 .image(height: 100, width: 100);
                           }
-                          return CachedNetworkImage(imageUrl: data.thumbnail);
+                          return UserIcon(imageUrl: data.thumbnail);
                         },
                         orElse: () =>
                             Assets.images.camera.image(height: 100, width: 100),
