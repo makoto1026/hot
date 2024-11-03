@@ -31,8 +31,8 @@ final GPSPoint bottomRight =
     GPSPoint(35 / 662432616337284, 139.69607877919705); // 右下
 
 // 擬似マップの大きさ（ピクセル単位）
-const double mapWidth = 500;
-const double mapHeight = 500;
+const double mapWidth = 1231;
+const double mapHeight = 1112;
 
 class AppFlame extends FlameGame with TapDetector, HasGameRef {
   /// マップ
@@ -345,8 +345,15 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
         }
       }
 
-      // キャラクターを移動させる
-      me.position += delta * moveSpeed * dt;
+      // 新しい位置を計算
+      Vector2 newPosition = me.position + delta * moveSpeed * dt;
+
+      // マップの境界チェック
+      newPosition.x = newPosition.x.clamp(0, mapWidth - me.size.x);
+      newPosition.y = newPosition.y.clamp(0, mapHeight - me.size.y);
+
+      // キャラクターの位置を更新
+      me.position = newPosition;
 
       // // TODO(tera): positionを自動で更新するコード、後で消す
       // Future.delayed(Duration(seconds: 3), () {
