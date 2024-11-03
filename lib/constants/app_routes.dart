@@ -5,6 +5,7 @@ import 'package:hub_of_talking/components/top_bottom_sheet_tab.dart';
 import 'package:hub_of_talking/features/page/login_page.dart';
 import 'package:hub_of_talking/features/page/room_page.dart';
 import 'package:hub_of_talking/features/page/top_page.dart';
+import 'package:hub_of_talking/features/page/web_view_page.dart';
 
 /// アプリのルーティングです。
 GoRouter appRouter(Ref ref) => GoRouter(
@@ -71,6 +72,15 @@ final appRoutes = [
       child: LoginPage(),
     ),
   ),
+  GoRoute(
+    parentNavigatorKey: rootNavigatorKey,
+    path: '${AppRoutes.webView.path}/:url',
+    pageBuilder: (context, state) => MaterialPage(
+      child: WebViewPage(
+        url: state.pathParameters['url']!,
+      ),
+    ),
+  ),
 ];
 
 /// アプリのルーティングパスです。
@@ -83,6 +93,9 @@ enum AppRoutes {
 
   /// Loginページ
   login('/login'),
+
+  /// webViewページ
+  webView('/webview'),
 
   /// サンプルページ2
   sample2('/sample2'),

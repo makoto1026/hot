@@ -11,6 +11,7 @@ class CharacterComponent extends SpriteAnimationComponent with TapCallbacks {
     required this.name,
     required this.characterPositionX,
     required this.characterPositionY,
+    required this.onTap,
   });
 
   /// キャラクターの名前
@@ -24,6 +25,9 @@ class CharacterComponent extends SpriteAnimationComponent with TapCallbacks {
 
   /// 名前表示用のテキストコンポーネント
   late TextComponent nameText;
+
+  /// タップ時のコールバック
+  final void Function() onTap;
 
   @override
   Future<void> onLoad() async {
@@ -66,6 +70,8 @@ class CharacterComponent extends SpriteAnimationComponent with TapCallbacks {
         ),
       );
     });
+
+    onTap();
 
     // trueを返すとタップイベントが完了したとみなされます
     return true;
