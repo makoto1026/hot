@@ -12,35 +12,40 @@ part 'map.g.dart';
 @Riverpod(keepAlive: true)
 class Map extends _$Map {
   late AppFlame flame;
+  StreamSubscription<List<Location>>? _locationListener;
+
   @override
-  void build() {
+  Future<void> build() async {
     flame = AppFlame();
-    init();
-    return;
+    await init();
   }
 
   Future<void> init() async {
-    final users = await ref.watch(userRepositoryProvider).fetchUsers();
+    final users = await ref.read(userRepositoryProvider).fetchUsers();
 
     for (final u in users) {
       unawaited(flame.addMember(u));
     }
-    final listener =
-        ref.watch(locationRepositoryProvider).all().listen((location) {
-      // locationをセットする
+
+    // すでにサブスクリプションが存在する場合は再利用
+    _locationListener ??=
+        ref.read(locationRepositoryProvider).all().listen((location) {
       for (final l in location) {
         unawaited(flame.updateLocation(l));
       }
     });
-    ref.watch(locationManagerProvider).maybeWhen(
+
+    // `locationManagerProvider`の状態が`data`の場合のみ実行
+    ref.read(locationManagerProvider).maybeWhen(
           data: (position) {
             flame.updateMeLocation(position);
           },
           orElse: () {},
         );
 
-    ref.onDispose(
-      listener.cancel,
-    );
+    // サブスクリプションのキャンセルをonDisposeで管理
+    ref.onDispose(() {
+      _locationListener?.cancel();
+    });
   }
 }
