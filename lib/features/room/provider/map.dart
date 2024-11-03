@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:hub_of_talking/features/location/domain/model/location.dart';
 import 'package:hub_of_talking/features/location/infrastructure/location_repository_provider.dart';
 import 'package:hub_of_talking/features/location/provider/location_manager.dart';
 import 'package:hub_of_talking/features/user/infrastructure/user_repository_provider.dart';
