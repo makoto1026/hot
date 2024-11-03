@@ -70,7 +70,8 @@ class CharacterComponent extends SpriteAnimationComponent
       borderImageComponent = SpriteComponent()
         ..sprite = borderSprite
         ..size = Vector2(60, 60)
-        ..position = Vector2(-15, -40);
+        ..position = Vector2(-15, -40)
+        ..add(RectangleHitbox()..size = Vector2(60, 60));
       add(borderImageComponent!);
 
       // タップ検知用のヒットボックスを追加
@@ -91,9 +92,17 @@ class CharacterComponent extends SpriteAnimationComponent
       overlayImageComponent = SpriteComponent()
         ..sprite = overlaySprite
         ..size = Vector2(50, 50)
-        ..position = Vector2(-10, -35);
+        ..position = Vector2(-10, -35)
+        ..add(RectangleHitbox()..size = Vector2(50, 50));
       add(overlayImageComponent!);
     }
+
+    // 親コンポーネント自体のタップ範囲設定
+    add(
+      RectangleHitbox()
+        ..size = Vector2(80, 80)
+        ..anchor = Anchor.center,
+    );
   }
 
   /// ネットワーク画像の読み込み処理
@@ -124,11 +133,5 @@ class CharacterComponent extends SpriteAnimationComponent
   bool onTapDown(TapDownEvent event) {
     onTap();
     return true;
-  }
-
-  /// 衝突時の処理
-  @override
-  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    super.onCollision(intersectionPoints, other);
   }
 }
