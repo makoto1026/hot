@@ -4,7 +4,10 @@ import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hub_of_talking/constants/app_routes.dart';
 import 'package:hub_of_talking/features/location/domain/model/location.dart';
+import 'package:hub_of_talking/features/page/web_view_page.dart';
 import 'package:hub_of_talking/features/user/domain/model/user.dart';
 import 'package:hub_of_talking/flame/member.dart';
 import 'package:hub_of_talking/flame/widget/character_component.dart';
@@ -48,6 +51,7 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
 
   /// アニメーションとアイドル画像
   late Sprite idleSprite;
+  late Sprite memberIdleSprite;
   late SpriteAnimation walkUpAnimation;
   late SpriteAnimation walkDownAnimation;
   late SpriteAnimation walkLeftAnimation;
@@ -60,7 +64,7 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
 
   bool isLoaded = false;
 
-// 現在位置を部屋の四隅を基準に擬似マップ上の相対位置に変換する関数
+  /// 現在位置を部屋の四隅を基準に擬似マップ上の相対位置に変換する関数
   Vector2 getRelativePosition(GPSPoint currentPosition) {
     // 緯度経度の範囲を計算
     final latitudeRange = topLeft.latitude - bottomLeft.latitude;
@@ -77,6 +81,74 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
     return Vector2(relativeX, relativeY);
   }
 
+  /// TODO(tera): 別の場所に移動する必要あるかも
+  /// ユーザー情報ダイアログを表示
+  void showUserInfoDialog(User user) {
+    // FlutterのshowDialogを使用してユーザー情報ダイアログを表示
+    showDialog<String>(
+      context: gameRef.buildContext!,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('${user.displayName}さん'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Text(
+                    'SNS: ',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop(); // ダイアログを閉じる
+                      showModalBottomSheet<String>(
+                        context: context,
+                        isScrollControlled: true,
+                        builder: (BuildContext context) {
+                          return WebViewPage(url: user.snsUrl);
+                        },
+                      );
+                    },
+                    child: Text(
+                      user.snsUrl,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                        decorationColor: Colors.blue,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Text(
+                '製品: ${user.product}',
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('閉じる'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Future<void> onLoad() async {
     // マップの読み込みと表示
@@ -86,14 +158,15 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
     add(map);
 
     // アイドル状態の画像（待機状態）
-    idleSprite = await loadSprite('character.png'); // idle.png はアイドル状態の画像
+    idleSprite = await loadSprite('man.png'); // idle.png はアイドル状態の画像
 
     // 歩行アニメーションの読み込みと設定
-    final spriteSheet = await images.load('cat.png'); // 添付された歩行アニメーションスプライトシート
+    final spriteSheet =
+        await images.load('man_walk.png'); // 添付された歩行アニメーションスプライトシート
     walkUpAnimation = SpriteAnimation.fromFrameData(
       spriteSheet,
       SpriteAnimationData.sequenced(
-        amount: 3, // フレーム数 (例: スプライトシートに4フレームある場合)
+        amount: 4, // フレーム数 (例: スプライトシートに4フレームある場合)
         stepTime: 0.3, // 各フレームの表示時間
         textureSize: Vector2(32, 48), // 各フレームのサイズ
         texturePosition: Vector2(0, 144),
@@ -103,7 +176,7 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
     walkDownAnimation = SpriteAnimation.fromFrameData(
       spriteSheet,
       SpriteAnimationData.sequenced(
-        amount: 3, // フレーム数 (例: スプライトシートに4フレームある場合)
+        amount: 4, // フレーム数 (例: スプライトシートに4フレームある場合)
         stepTime: 0.3, // 各フレームの表示時間
         textureSize: Vector2(32, 48), // 各フレームのサイズ
         texturePosition: Vector2(0, 0),
@@ -113,7 +186,7 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
     walkLeftAnimation = SpriteAnimation.fromFrameData(
       spriteSheet,
       SpriteAnimationData.sequenced(
-        amount: 3, // フレーム数 (例: スプライトシートに4フレームある場合)
+        amount: 4, // フレーム数 (例: スプライトシートに4フレームある場合)
         stepTime: 0.3, // 各フレームの表示時間
         textureSize: Vector2(32, 48), // 各フレームのサイズ
         texturePosition: Vector2(0, 48),
@@ -123,7 +196,7 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
     walkRightAnimation = SpriteAnimation.fromFrameData(
       spriteSheet,
       SpriteAnimationData.sequenced(
-        amount: 3, // フレーム数 (例: スプライトシートに4フレームある場合)
+        amount: 4, // フレーム数 (例: スプライトシートに4フレームある場合)
         stepTime: 0.3, // 各フレームの表示時間
         textureSize: Vector2(32, 48), // 各フレームのサイズ
         texturePosition: Vector2(0, 96),
@@ -135,10 +208,18 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
     final character3Animation = SpriteAnimation.fromFrameData(
       character3SpriteSheet,
       SpriteAnimationData.sequenced(
-        amount: 3, // フレーム数 (例: スプライトシートに4フレームある場合)
+        amount: 4, // フレーム数 (例: スプライトシートに4フレームある場合)
         stepTime: 0.1, // 各フレームの表示時間
         textureSize: Vector2(32, 48), // 各フレームのサイズ
       ),
+    );
+
+    final user = User(
+      id: '1',
+      displayName: 'じぶん',
+      thumbnail: 'thumbnail',
+      snsUrl: 'snsUrl',
+      product: 'product',
     );
 
     // // キャラクターの読み込みと表示
@@ -146,9 +227,12 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
       name: 'じぶん',
       characterPositionX: size.x / 2,
       characterPositionY: size.y / 2,
+      onTap: () => showUserInfoDialog(user),
     )
-      ..animation =
-          SpriteAnimation.spriteList([idleSprite], stepTime: double.infinity)
+      ..animation = SpriteAnimation.spriteList(
+        [idleSprite],
+        stepTime: double.infinity,
+      )
       ..size = Vector2(32, 48) // キャラクターサイズを設定
       ..position = Vector2(size.x / 2, size.y / 2); // 初期位置を画面中央に設定
 
@@ -205,23 +289,19 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
     if (members.containsKey(user.id)) {
       return;
     }
-    final character2SpriteSheet =
-        await images.load('character_2.png'); // 添付された歩行アニメーションスプライトシート
-    final character2Animation = SpriteAnimation.fromFrameData(
-      character2SpriteSheet,
-      SpriteAnimationData.sequenced(
-        amount: 3, // フレーム数 (例: スプライトシートに4フレームある場合)
-        stepTime: 0.1, // 各フレームの表示時間
-        textureSize: Vector2(32, 48), // 各フレームのサイズ
-      ),
-    );
+    // アイドル状態の画像（待機状態）
+    memberIdleSprite = await loadSprite('man.png'); // idle.png はアイドル状態の画像
 
     final character = CharacterComponent(
-      name: '友だち１',
+      name: user.displayName,
       characterPositionX: size.x / 3,
       characterPositionY: size.y / 3,
+      onTap: () => showUserInfoDialog(user),
     )
-      ..animation = character2Animation
+      ..animation = SpriteAnimation.spriteList(
+        [memberIdleSprite],
+        stepTime: double.infinity,
+      )
       ..size = Vector2(32, 48) // キャラクターサイズを設定
       ..position = Vector2(size.x / 3, size.y / 3); // 初期位置を画面中央に設定
 
