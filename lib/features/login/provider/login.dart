@@ -87,7 +87,7 @@ class Login extends _$Login {
         deviceId = iosInfo.identifierForVendor; // iOSのユニークID
       }
 
-      deviceId ??= const UuidV4().toString();
+      deviceId ??= UuidV4().generate();
 
       final user = await userRepository.fetchUserByDeviceId(deviceId!);
 

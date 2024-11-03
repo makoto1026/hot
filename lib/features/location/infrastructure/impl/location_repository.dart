@@ -14,10 +14,16 @@ class ImplLocationRepository implements LocationRepository {
 
   @override
   Future<Location> upsert(String id, Location location) async {
+    await _supabase
+        .from('locations') // テーブル名
+        .delete()
+        .eq('user_id', id)
+        .catchError(print);
     final response = await _supabase
         .from('locations') // テーブル名
         .upsert(location.toJson())
-        .eq('user_id', id);
+        .eq('user_id', id)
+        .catchError(print);
 
     return location;
   }

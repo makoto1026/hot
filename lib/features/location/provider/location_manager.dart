@@ -1,8 +1,7 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final locationManagerProvider =
-    StreamProvider.autoDispose<Position>((a) async* {
+Future<void> checkPermission() async {
   bool serviceEnabled;
   LocationPermission permission;
 
@@ -24,6 +23,4 @@ final locationManagerProvider =
       'Location permissions are permanently denied, we cannot request permissions.',
     );
   }
-
-  yield* Geolocator.getPositionStream();
-});
+}

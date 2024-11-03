@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
@@ -87,17 +89,34 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
 
   /// 現在位置を部屋の四隅を基準に擬似マップ上の相対位置に変換する関数
   Vector2 getRelativePosition(GPSPoint currentPosition) {
+    final random = Random();
     // 緯度経度の範囲を計算
     final latitudeRange = topLeft.latitude - bottomLeft.latitude;
     final longitudeRange = topRight.longitude - topLeft.longitude;
 
-    // 現在位置の相対的なX, Y位置を算出
+    // 範囲外チェック
+    final isOutOfLatitudeRange =
+        currentPosition.latitude < bottomLeft.latitude ||
+            currentPosition.latitude > topLeft.latitude;
+    final isOutOfLongitudeRange =
+        currentPosition.longitude < topLeft.longitude ||
+            currentPosition.longitude > topRight.longitude;
+
+    // 緯度が範囲外ならランダムな緯度を生成
+    final latitude = isOutOfLatitudeRange
+        ? bottomLeft.latitude + random.nextDouble() * latitudeRange
+        : currentPosition.latitude;
+
+    // 経度が範囲外ならランダムな経度を生成
+    final longitude = isOutOfLongitudeRange
+        ? topLeft.longitude + random.nextDouble() * longitudeRange
+        : currentPosition.longitude;
+
+    // 緯度・経度の相対位置をピクセル座標に変換
     final relativeX =
-        ((currentPosition.longitude - topLeft.longitude) / longitudeRange) *
-            mapWidth;
+        ((longitude - topLeft.longitude) / longitudeRange) * mapWidth;
     final relativeY =
-        ((topLeft.latitude - currentPosition.latitude) / latitudeRange) *
-            mapHeight;
+        ((topLeft.latitude - latitude) / latitudeRange) * mapHeight;
 
     return Vector2(relativeX, relativeY);
   }
@@ -306,9 +325,11 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
   Future<void> updateLocation(Location location) async {
     print('updateLocation');
     print(
-        getRelativePosition(GPSPoint(location.latitude, location.longitude)).x);
+      getRelativePosition(GPSPoint(location.latitude, location.longitude)).x,
+    );
     print(
-        getRelativePosition(GPSPoint(location.latitude, location.longitude)).y);
+      getRelativePosition(GPSPoint(location.latitude, location.longitude)).y,
+    );
     members[location.userId]?.spriteComponent.position =
         getRelativePosition(GPSPoint(location.latitude, location.longitude));
   }
@@ -336,7 +357,7 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
       }
 
       // 新しい位置を計算
-      Vector2 newPosition = me.position + delta * moveSpeed * dt;
+      final newPosition = me.position + delta * moveSpeed * dt;
 
       // マップの境界チェック
       newPosition.x = newPosition.x.clamp(0, mapWidth - me.size.x);
@@ -378,16 +399,9 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
 
   /// X座標、Y座標を指定してキャラクターの位置を設定します。
   void updateMeLocation(Position position) {
-    print('updateMeLocation');
     final relativePosition =
         getRelativePosition(GPSPoint(position.latitude, position.longitude));
-    me.position =
-        Vector2(relativePosition.x, relativePosition.y) * moveSpeed * 0.01;
-  }
 
-  /// X座標、Y座標を指定してキャラクターの位置を設定します。
-  void setMeLocation() {
-    print('updateMeLocation');
-    me.position = Vector2(0, 0) * moveSpeed * 0.01;
+    me.position = Vector2(relativePosition.x, relativePosition.y);
   }
 }

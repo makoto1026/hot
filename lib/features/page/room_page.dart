@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:hub_of_talking/features/location/provider/location_auto_save.dart';
 import 'package:hub_of_talking/features/room/widget/map_space.dart';
 
 /// Roomページです。
-class RoomPage extends StatelessWidget {
+class RoomPage extends HookConsumerWidget {
   /// コンストラクタ
   const RoomPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(locationAutoSaveProvider);
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, _) async {

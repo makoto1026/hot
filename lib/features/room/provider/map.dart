@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:geolocator/geolocator.dart';
 import 'package:hub_of_talking/features/location/domain/model/location.dart';
 import 'package:hub_of_talking/features/location/infrastructure/location_repository_provider.dart';
 import 'package:hub_of_talking/features/location/provider/location_manager.dart';
@@ -34,13 +35,11 @@ class Map extends _$Map {
       }
     });
 
-    // `locationManagerProvider`の状態が`data`の場合のみ実行
-    ref.read(locationManagerProvider).maybeWhen(
-          data: (position) {
-            flame.updateMeLocation(position);
-          },
-          orElse: () {},
-        );
+    try {
+      await checkPermission();
+    } catch (e) {
+      print(e);
+    }
 
     // サブスクリプションのキャンセルをonDisposeで管理
     ref.onDispose(() {

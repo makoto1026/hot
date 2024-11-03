@@ -28,13 +28,13 @@ class LoginPage extends HookConsumerWidget {
       // 初期化がまだ行われていない場合のみ、コントローラに初期値をセット
       state.maybeWhen(
         data: (state) {
+          isInitialized.value = true;
           nameController.text = state.name;
           productController.text = state.product;
           snsLinkController.text = state.snsLink;
         },
         orElse: () {},
       );
-      isInitialized.value = true;
     }
 
     Future<void> loginAnonymously() async {
@@ -49,22 +49,6 @@ class LoginPage extends HookConsumerWidget {
         );
       }
     }
-
-    // `state`が更新された時にコントローラに初期値を設定
-    useEffect(
-      () {
-        state.maybeWhen(
-          data: (state) {
-            nameController.text = state.name;
-            productController.text = state.product;
-            snsLinkController.text = state.snsLink;
-          },
-          orElse: () {},
-        );
-        return null; // `useEffect`のリターンは必ず`null`に設定
-      },
-      [state],
-    );
 
     return AutomaticFocusManager(
       child: Scaffold(
