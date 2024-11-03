@@ -24,7 +24,7 @@ class ImagePicker extends StatelessWidget {
   Future<File?> cropImage({required File image}) async {
     final croppedFile = await ImageCropper().cropImage(
       sourcePath: image.path,
-      aspectRatio: const CropAspectRatio(ratioX: 5, ratioY: 6),
+      aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
       compressQuality: 100,
       uiSettings: [
         AndroidUiSettings(

@@ -11,7 +11,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 GoRouter appRouter(Ref ref) => GoRouter(
       navigatorKey: rootNavigatorKey,
       initialLocation: Supabase.instance.client.auth.currentUser != null
-          ? AppRoutes.top.path
+          ? AppRoutes.login.path
           : AppRoutes.top.path,
       routes: appRoutes,
     );
@@ -61,6 +61,13 @@ final appRoutes = [
       child: WebViewPage(
         url: state.pathParameters['url']!,
       ),
+    ),
+  ),
+  GoRoute(
+    parentNavigatorKey: rootNavigatorKey,
+    path: AppRoutes.loginAccept.path,
+    pageBuilder: (context, state) => const MaterialPage(
+      child: SizedBox(),
     ),
   ),
 ];
