@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:hub_of_talking/features/page/login_accept_page.dart';
 import 'package:hub_of_talking/features/page/login_page.dart';
 import 'package:hub_of_talking/features/page/room_page.dart';
 import 'package:hub_of_talking/features/page/top_page.dart';
@@ -12,7 +13,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 GoRouter appRouter(Ref ref) => GoRouter(
       navigatorKey: rootNavigatorKey,
       initialLocation: Supabase.instance.client.auth.currentUser != null
-          ? AppRoutes.login.path
+          ? AppRoutes.top.path
           : AppRoutes.top.path,
       routes: appRoutes,
     );
@@ -64,6 +65,13 @@ final appRoutes = [
       ),
     ),
   ),
+  GoRoute(
+    parentNavigatorKey: rootNavigatorKey,
+    path: AppRoutes.loginAccept.path,
+    pageBuilder: (context, state) => const MaterialPage(
+      child: LoginAcceptPage(),
+    ),
+  ),
 ];
 
 /// アプリのルーティングパスです。
@@ -76,6 +84,9 @@ enum AppRoutes {
 
   /// Loginページ
   login('/login'),
+
+  /// 登録完了ページ
+  loginAccept('/loginAccept'),
 
   /// webViewページ
   webView('/webview'),
