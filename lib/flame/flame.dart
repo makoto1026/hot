@@ -152,9 +152,10 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
   @override
   Future<void> onLoad() async {
     // マップの読み込みと表示
+    final mapSprite = await loadSprite('map.png');
     map = SpriteComponent()
-      ..sprite = await loadSprite('map.png')
-      ..size = size;
+      ..sprite = mapSprite
+      ..size = mapSprite.srcSize;
     add(map);
 
     // アイドル状態の画像（待機状態）
@@ -367,6 +368,8 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
         me.position.y + (targetPosition!.y - me.position.y) * t,
       );
     }
+
+    camera.follow(me);
   }
 
   /// X座標、Y座標を指定してキャラクターの位置を設定します。
