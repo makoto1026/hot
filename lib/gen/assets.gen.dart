@@ -83,6 +83,17 @@ class $AssetsImagesGen {
   AssetGenImage get character3 =>
       const AssetGenImage('assets/images/character_3.png');
 
+  /// File path: assets/images/man.png
+  AssetGenImage get man => const AssetGenImage('assets/images/man.png');
+
+  /// File path: assets/images/man_idle.png
+  AssetGenImage get manIdle =>
+      const AssetGenImage('assets/images/man_idle.png');
+
+  /// File path: assets/images/man_walk.png
+  AssetGenImage get manWalk =>
+      const AssetGenImage('assets/images/man_walk.png');
+
   /// File path: assets/images/icon_frame.png
   AssetGenImage get iconFrame =>
       const AssetGenImage('assets/images/icon_frame.png');
@@ -104,6 +115,9 @@ class $AssetsImagesGen {
         character,
         character2,
         character3,
+        man,
+        manIdle,
+        manWalk,
         iconFrame,
         man,
         map

@@ -25,6 +25,7 @@ mixin _$User {
   String get thumbnail => throw _privateConstructorUsedError;
   String get snsUrl => throw _privateConstructorUsedError;
   String get product => throw _privateConstructorUsedError;
+  String get deviceId => throw _privateConstructorUsedError;
 
   /// Serializes this User to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,7 +46,8 @@ abstract class $UserCopyWith<$Res> {
       String displayName,
       String thumbnail,
       String snsUrl,
-      String product});
+      String product,
+      String deviceId});
 }
 
 /// @nodoc
@@ -68,6 +70,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? thumbnail = null,
     Object? snsUrl = null,
     Object? product = null,
+    Object? deviceId = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -90,6 +93,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
               as String,
+      deviceId: null == deviceId
+          ? _value.deviceId
+          : deviceId // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -106,7 +113,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String displayName,
       String thumbnail,
       String snsUrl,
-      String product});
+      String product,
+      String deviceId});
 }
 
 /// @nodoc
@@ -126,6 +134,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? thumbnail = null,
     Object? snsUrl = null,
     Object? product = null,
+    Object? deviceId = null,
   }) {
     return _then(_$UserImpl(
       id: null == id
@@ -148,6 +157,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
               as String,
+      deviceId: null == deviceId
+          ? _value.deviceId
+          : deviceId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -161,7 +174,8 @@ class _$UserImpl implements _User {
       required this.displayName,
       required this.thumbnail,
       required this.snsUrl,
-      required this.product});
+      required this.product,
+      required this.deviceId});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -176,10 +190,12 @@ class _$UserImpl implements _User {
   final String snsUrl;
   @override
   final String product;
+  @override
+  final String deviceId;
 
   @override
   String toString() {
-    return 'User(id: $id, displayName: $displayName, thumbnail: $thumbnail, snsUrl: $snsUrl, product: $product)';
+    return 'User(id: $id, displayName: $displayName, thumbnail: $thumbnail, snsUrl: $snsUrl, product: $product, deviceId: $deviceId)';
   }
 
   @override
@@ -193,13 +209,15 @@ class _$UserImpl implements _User {
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
             (identical(other.snsUrl, snsUrl) || other.snsUrl == snsUrl) &&
-            (identical(other.product, product) || other.product == product));
+            (identical(other.product, product) || other.product == product) &&
+            (identical(other.deviceId, deviceId) ||
+                other.deviceId == deviceId));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, displayName, thumbnail, snsUrl, product);
+  int get hashCode => Object.hash(
+      runtimeType, id, displayName, thumbnail, snsUrl, product, deviceId);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -223,7 +241,8 @@ abstract class _User implements User {
       required final String displayName,
       required final String thumbnail,
       required final String snsUrl,
-      required final String product}) = _$UserImpl;
+      required final String product,
+      required final String deviceId}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -237,6 +256,8 @@ abstract class _User implements User {
   String get snsUrl;
   @override
   String get product;
+  @override
+  String get deviceId;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.

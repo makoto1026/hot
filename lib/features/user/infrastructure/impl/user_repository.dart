@@ -25,7 +25,10 @@ class ImplUserRepository implements UserRepository {
   Future<void> updateUser(User user) async {
     try {
       // TODOfreezedのtoJsonを使う
-      await _supabase.from('users').update(user.toJson()).eq('id', user.id);
+      await _supabase
+          .from('users')
+          .update(user.toJson())
+          .eq('deviceId', user.deviceId);
     } catch (e) {
       print('Error updating user profile: $e');
     }
@@ -43,6 +46,16 @@ class ImplUserRepository implements UserRepository {
         .from('users') // テーブル名
         .select()
         .eq('id', id)
+        .single();
+    return User.fromJson(response);
+  }
+
+  @override
+  Future<User> fetchUserByDeviceId(String deviceId) async {
+    final response = await _supabase
+        .from('users') // テーブル名
+        .select()
+        .eq('device_id', deviceId)
         .single();
     return User.fromJson(response);
   }

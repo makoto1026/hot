@@ -39,7 +39,7 @@ Future<void> main() async {
     url: Config.supabaseUrl,
     anonKey: Config.supabaseAnon,
   );
-  print(Config.supabaseUrl);
+
   runApp(
     UncontrolledProviderScope(
       container: container,

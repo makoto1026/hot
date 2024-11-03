@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:geolocator/geolocator.dart';
+import 'package:hub_of_talking/features/location/domain/model/location.dart';
 import 'package:hub_of_talking/features/location/infrastructure/location_repository_provider.dart';
 import 'package:hub_of_talking/features/location/provider/location_manager.dart';
 import 'package:hub_of_talking/features/user/infrastructure/user_repository_provider.dart';
@@ -24,7 +25,8 @@ class Map extends _$Map {
     for (final u in users) {
       unawaited(flame.addMember(u));
     }
-    ref.watch(locationRepositoryProvider).all().listen((location) {
+    final listener =
+        ref.watch(locationRepositoryProvider).all().listen((location) {
       // locationをセットする
       for (final l in location) {
         unawaited(flame.updateLocation(l));
@@ -36,5 +38,9 @@ class Map extends _$Map {
           },
           orElse: () {},
         );
+
+    ref.onDispose(
+      listener.cancel,
+    );
   }
 }

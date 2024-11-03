@@ -10,4 +10,5 @@ abstract class UserRepository {
   Future<void> insertUser(User user);
   Future<List<User>> fetchUsers();
   Future<User> fetchUser(String id);
+  Future<User> fetchUserByDeviceId(String deviceId);
 }
