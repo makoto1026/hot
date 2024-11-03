@@ -106,35 +106,39 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
                       color: Colors.black,
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).pop(); // ダイアログを閉じる
-                      showModalBottomSheet<String>(
-                        context: context,
-                        isScrollControlled: true,
-                        builder: (BuildContext context) {
-                          return WebViewPage(url: user.snsUrl);
-                        },
-                      );
-                    },
-                    child: Text(
-                      user.snsUrl,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        color: Colors.blue,
-                        decoration: TextDecoration.underline,
-                        decorationColor: Colors.blue,
+                  Flexible(
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pop(); // ダイアログを閉じる
+                        showModalBottomSheet<String>(
+                          context: context,
+                          isScrollControlled: true,
+                          builder: (BuildContext context) {
+                            return WebViewPage(url: user.snsUrl);
+                          },
+                        );
+                      },
+                      child: Text(
+                        user.snsUrl,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
+                          decorationColor: Colors.blue,
+                        ),
                       ),
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 16),
-              Text(
-                '製品: ${user.product}',
-                style: const TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
+              Flexible(
+                child: Text(
+                  'プロダクト: ${user.product}',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ],
