@@ -14,10 +14,10 @@ final lightThemeProvider = Provider<ThemeData>(
           0xffD9D9D9,
         ),
       ),
-      scaffoldBackgroundColor: Colors.white,
+      scaffoldBackgroundColor: ColorTheme.blue,
       appBarTheme: const AppBarTheme(
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: ColorTheme.blue,
         titleTextStyle: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 24,

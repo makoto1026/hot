@@ -50,6 +50,24 @@ class $AssetsAppIconGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/HOT.png
+  AssetGenImage get hot => const AssetGenImage('assets/images/HOT.png');
+
+  /// File path: assets/images/Hub of Talking.png
+  AssetGenImage get hubOfTalking =>
+      const AssetGenImage('assets/images/Hub of Talking.png');
+
+  /// File path: assets/images/button_bg.png
+  AssetGenImage get buttonBg =>
+      const AssetGenImage('assets/images/button_bg.png');
+
+  /// File path: assets/images/camera.png
+  AssetGenImage get camera => const AssetGenImage('assets/images/camera.png');
+
+  /// File path: assets/images/campfire.png
+  AssetGenImage get campfire =>
+      const AssetGenImage('assets/images/campfire.png');
+
   /// File path: assets/images/cat.png
   AssetGenImage get cat => const AssetGenImage('assets/images/cat.png');
 
@@ -65,12 +83,31 @@ class $AssetsImagesGen {
   AssetGenImage get character3 =>
       const AssetGenImage('assets/images/character_3.png');
 
+  /// File path: assets/images/icon_frame.png
+  AssetGenImage get iconFrame =>
+      const AssetGenImage('assets/images/icon_frame.png');
+
+  /// File path: assets/images/man.png
+  AssetGenImage get man => const AssetGenImage('assets/images/man.png');
+
   /// File path: assets/images/map.png
   AssetGenImage get map => const AssetGenImage('assets/images/map.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [cat, character, character2, character3, map];
+  List<AssetGenImage> get values => [
+        hot,
+        hubOfTalking,
+        buttonBg,
+        camera,
+        campfire,
+        cat,
+        character,
+        character2,
+        character3,
+        iconFrame,
+        man,
+        map
+      ];
 }
 
 class Assets {

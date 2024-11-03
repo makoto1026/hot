@@ -57,6 +57,13 @@ flutter:
   assets:
     - assets/app_icon/
     - assets/images/
+  fonts:
+    - family: AnonymousPro
+      fonts:
+        - asset: assets/font/AnonymousPro-Bold.ttf
+    - family: Dhurjati
+      fonts:
+        - asset: assets/font/Dhurjati-Regular.ttf
 
 flutter_gen:
   integrations:
