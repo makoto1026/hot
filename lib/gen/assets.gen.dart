@@ -97,6 +97,14 @@ class $AssetsImagesGen {
   /// File path: assets/images/map.png
   AssetGenImage get map => const AssetGenImage('assets/images/map.png');
 
+  /// File path: assets/images/placeholder.png
+  AssetGenImage get placeholder =>
+      const AssetGenImage('assets/images/placeholder.png');
+
+  /// File path: assets/images/white_border.png
+  AssetGenImage get whiteBorder =>
+      const AssetGenImage('assets/images/white_border.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         buttonBg,
@@ -111,7 +119,9 @@ class $AssetsImagesGen {
         man,
         manIdle,
         manWalk,
-        map
+        map,
+        placeholder,
+        whiteBorder
       ];
 }
 
