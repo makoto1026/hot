@@ -6,6 +6,7 @@ import 'package:hub_of_talking/features/login/provider/login_state.dart';
 import 'package:hub_of_talking/features/user/domain/model/user.dart';
 import 'package:hub_of_talking/features/user/infrastructure/user_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' as sp;
 import 'package:uuid/v4.dart';
 
 part 'login.g.dart';
@@ -49,6 +50,27 @@ class Login extends _$Login {
 
   void setProduct(String product) {
     state = AsyncValue.data(state.value!.copyWith(product: product));
+  }
+
+  Future<void> setImage(File file) async {
+    try {
+      state = const AsyncValue.loading();
+      final fileName = 'uploads/${DateTime.now().millisecondsSinceEpoch}.jpg';
+
+      // Supabaseにファイルをアップロード
+      final response = await sp.Supabase.instance.client.storage
+          .from('images')
+          .upload(fileName, file);
+
+      final publicUrl = sp.Supabase.instance.client.storage
+          .from('images')
+          .getPublicUrl(fileName);
+
+      state = AsyncValue.data(state.value!.copyWith(thumbnail: publicUrl));
+    } catch (e) {
+      print(e);
+      state = AsyncValue.data(state.value!);
+    }
   }
 
   @override
