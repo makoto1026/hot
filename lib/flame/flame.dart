@@ -227,17 +227,6 @@ class AppFlame extends FlameGame with TapDetector, HasGameRef {
       ),
     );
 
-    final character3SpriteSheet =
-        await images.load('character_3.png'); // 添付された歩行アニメーションスプライトシート
-    final character3Animation = SpriteAnimation.fromFrameData(
-      character3SpriteSheet,
-      SpriteAnimationData.sequenced(
-        amount: 4, // フレーム数 (例: スプライトシートに4フレームある場合)
-        stepTime: 0.1, // 各フレームの表示時間
-        textureSize: Vector2(32, 48), // 各フレームのサイズ
-      ),
-    );
-
     const user = User(
       id: '1',
       displayName: 'じぶん',
