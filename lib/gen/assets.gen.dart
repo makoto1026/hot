@@ -65,6 +65,9 @@ class $AssetsImagesGen {
   AssetGenImage get character3 =>
       const AssetGenImage('assets/images/character_3.png');
 
+  /// File path: assets/images/exit.png
+  AssetGenImage get exit => const AssetGenImage('assets/images/exit.png');
+
   /// File path: assets/images/man.png
   AssetGenImage get man => const AssetGenImage('assets/images/man.png');
 
@@ -80,8 +83,17 @@ class $AssetsImagesGen {
   AssetGenImage get map => const AssetGenImage('assets/images/map.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [cat, character, character2, character3, man, manIdle, manWalk, map];
+  List<AssetGenImage> get values => [
+        cat,
+        character,
+        character2,
+        character3,
+        exit,
+        man,
+        manIdle,
+        manWalk,
+        map
+      ];
 }
 
 class Assets {

@@ -11,9 +11,6 @@ class MapSpace extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.green[50],
-      ),
       backgroundColor: Colors.green[50],
       body: GameWidget(
         game: ref.watch(mapProvider.notifier).flame,
